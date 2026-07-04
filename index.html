@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Gut Log</title>
+<title>Health Log</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap');
 :root{
@@ -161,8 +161,8 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
 .export-banner button{background:var(--gr);color:#fff;border:none;border-radius:8px;padding:7px 12px;font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;touch-action:manipulation;white-space:nowrap;}
 
 /* History */
-#hp{display:none;margin-top:6px;}
-#hp.open{display:block;}
+#hp,#mhp,#slhp{display:none;margin-top:6px;}
+#hp.open,#mhp.open,#slhp.open{display:block;}
 .he{background:var(--ww);border:1px solid var(--rule);border-radius:10px;padding:13px 15px;margin-bottom:9px;}
 .hed{font-size:11px;font-weight:500;color:var(--mu);margin-bottom:5px;text-transform:uppercase;letter-spacing:.07em;}
 .ht{font-size:11px;font-weight:600;color:var(--ac);margin:7px 0 2px;}
@@ -254,7 +254,7 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
     <!-- Stress -->
     <div class="sec">
       <div class="sl">Stress level</div>
-      <div class="stress-opts">
+      <div class="stress-opts" id="gi-stress-opts">
         <button class="stress-opt s0" data-sv="0">
           <div class="stress-dot"></div>
           <div><div class="stress-title">Normal</div><div class="stress-desc">Breathing easy. Thoughts feel manageable.</div></div>
@@ -302,7 +302,7 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
       <div class="sl purple">Medications today</div>
       <div class="med-grid">
         <button class="med-item" data-m="miralax"><div><span class="med-name">MiraLax</span><span class="med-dose">daily</span></div></button>
-        <button class="med-item" data-m="pepcid"><div><span class="med-name">Prilosec</span><span class="med-dose">as needed</span></div></button>
+        <button class="med-item" data-m="prilosec"><div><span class="med-name">Prilosec</span><span class="med-dose">as needed</span></div></button>
         <button class="med-item" data-m="zofran"><div><span class="med-name">Zofran</span><span class="med-dose">as needed</span></div></button>
         <button class="med-item" data-m="fiber"><div><span class="med-name">Fiber supplement</span><span class="med-dose">daily</span></div></button>
         <button class="med-item" data-m="qulipta"><div><span class="med-name">Qulipta</span><span class="med-dose">daily</span></div></button>
@@ -345,13 +345,7 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
 
       <!-- Severity -->
       <div style="font-size:11px;color:var(--mu);margin-bottom:6px">Severity</div>
-      <div class="sd" data-k="msev" style="margin-bottom:12px;gap:5px">
-        <div class="dot" data-k="msev" data-n="1">1</div>
-        <div class="dot" data-k="msev" data-n="2">2</div>
-        <div class="dot" data-k="msev" data-n="3">3</div>
-        <div class="dot" data-k="msev" data-n="4">4</div>
-        <div class="dot" data-k="msev" data-n="5">5</div>
-      </div>
+      <div class="sd" id="msev-dots" style="margin-bottom:12px;gap:5px"></div>
 
       <!-- Location -->
       <div style="font-size:11px;color:var(--mu);margin-bottom:6px">Location</div>
@@ -387,7 +381,7 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
 
       <!-- Stress at onset -->
       <div style="font-size:11px;color:var(--mu);margin-bottom:6px">Stress at onset</div>
-      <div class="stress-opts" id="m-stress-opts" style="margin-bottom:12px">
+      <div class="stress-opts" id="mg-stress-opts" style="margin-bottom:12px">
         <button class="stress-opt s0" data-sv="0">
           <div class="stress-dot"></div>
           <div><div class="stress-title">Normal</div><div class="stress-desc">Breathing easy. Thoughts feel manageable.</div></div>
@@ -435,7 +429,9 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
     <div class="acts">
       <button class="svbtn" id="m-savebtn">Save migraine</button>
       <button class="expbtn" id="m-expbtn">Export CSV</button>
+      <button class="hbtn" id="mhtog">History</button>
     </div>
+    <div id="mhp"></div>
 
   </div><!-- /tab-migraine -->
 
@@ -457,13 +453,7 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
 
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
         <label style="font-size:12px;color:var(--mu);width:80px">Groggy on waking</label>
-        <div class="sd" data-k="groggy" style="gap:5px">
-          <div class="dot" data-k="groggy" data-n="1">1</div>
-          <div class="dot" data-k="groggy" data-n="2">2</div>
-          <div class="dot" data-k="groggy" data-n="3">3</div>
-          <div class="dot" data-k="groggy" data-n="4">4</div>
-          <div class="dot" data-k="groggy" data-n="5">5</div>
-        </div>
+        <div class="sd" id="groggy-dots" style="gap:5px"></div>
       </div>
 
       <div class="chk-row">
@@ -479,7 +469,9 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
 
     <div class="acts">
       <button class="svbtn" id="sl-savebtn">Save sleep</button>
+      <button class="hbtn" id="slhtog">History</button>
     </div>
+    <div id="slhp"></div>
   </div><!-- /tab-sleep -->
 
 </div><!-- /wrap -->
@@ -489,24 +481,26 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
 (function(){
 'use strict';
 
-// ── Coords (Reston VA 20191) ─────────────────────────────────────
+// ── Coords (Reston VA 20191) ──────────────────────────────────────
 var LAT=38.9359, LNG=-77.3537;
 
-// ── State ────────────────────────────────────────────────────────
+// ── State ─────────────────────────────────────────────────────────
 var nd=new Date(), td=new Date(), curTod='morning', curTab='gi';
 nd.setHours(0,0,0,0); td.setHours(0,0,0,0);
 
-var gi={water:0,sym:{hollow:0,pain:0,bloat:0,ache:0,nausea:0,energy:0},bm:0,bt:null,strain:false,stress:-1,gerd:[],meds:[],foods:[],notes:''};
-var mg={onset:'',end:'',sev:0,loc:null,syms:[],prodrome:[],stress:-1,meds:[],medworks:false,numbness:'',notes:'',weather:null};
-var sl={bed:'',wake:'',groggy:0,nightmare:false,waking:false};
+function mkGI(){return {water:0,sym:{hollow:0,pain:0,bloat:0,ache:0,nausea:0,energy:0},bm:0,bt:null,strain:false,stress:-1,gerd:[],meds:[],foods:[],notes:''};}
+function mkMG(){return {onset:'',end:'',sev:0,loc:null,syms:[],prodrome:[],stress:-1,meds:[],medworks:false,numbness:'',notes:'',weather:null};}
+function mkSL(){return {bed:'',wake:'',groggy:0,nightmare:false,waking:false};}
+
+var gi=mkGI(), mg=mkMG(), sl=mkSL();
 
 var KS=['hollow','pain','bloat','ache','nausea','energy'];
 var KL={hollow:'Hollow/rumbling',pain:'Stomach pain',bloat:'Bloating',ache:'Body aches',nausea:'Nausea',energy:'Energy'};
 var TL={morning:'Morning',midday:'Midday',evening:'Evening'};
 var FL={morning:'Breakfast',midday:'Lunch & snacks',evening:'Dinner'};
-var STRESS_LABELS=['Normal','Getting there','Abject panic'];
+var SL=['Normal','Getting there','Abject panic'];
 
-// ── Storage helpers ──────────────────────────────────────────────
+// ── Storage ───────────────────────────────────────────────────────
 function dk(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
 function gsk(d,t){return 'gl5-gi-'+dk(d)+'-'+t;}
 function msk(d){return 'gl5-mg-'+dk(d);}
@@ -515,504 +509,563 @@ function wk(d){return 'gl5-w-'+dk(d);}
 function lg(k){try{var v=localStorage.getItem(k);return v?JSON.parse(v):null;}catch(e){return null;}}
 function lset(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
 
-// ── Tap helper ───────────────────────────────────────────────────
-function tap(el,fn){
-  var mv=false;
-  el.addEventListener('touchstart',function(){mv=false;},{passive:true});
-  el.addEventListener('touchmove',function(){mv=true;},{passive:true});
-  el.addEventListener('touchend',function(e){if(!mv){e.preventDefault();e.stopPropagation();fn();}});
-  el.addEventListener('click',fn);
+// ── Tap helper (fire once, works on touch + mouse) ────────────────
+// Uses touchstart flag to suppress the ghost click iOS fires after touchend
+function tap(el, fn){
+  var touched = false;
+  el.addEventListener('touchstart', function(){ touched = true; }, {passive:true});
+  el.addEventListener('touchend', function(e){
+    if(touched){ e.preventDefault(); touched = false; fn(); }
+  });
+  el.addEventListener('click', function(){
+    if(!touched){ fn(); } // only fires on real mouse click (touched already reset)
+    touched = false;
+  });
 }
 
-// ── Reset states ─────────────────────────────────────────────────
-function rstGI(){gi={water:0,sym:{hollow:0,pain:0,bloat:0,ache:0,nausea:0,energy:0},bm:0,bt:null,strain:false,stress:-1,gerd:[],meds:[],foods:[],notes:''};}
-function rstMG(){mg={onset:'',end:'',sev:0,loc:null,syms:[],prodrome:[],stress:-1,meds:[],medworks:false,numbness:'',notes:'',weather:null};}
-function rstSL(){sl={bed:'',wake:'',groggy:0,nightmare:false,waking:false};}
+// ── Checkbox helper (class-based, reliable toggle) ────────────────
+function toggleChk(id, stateFn){
+  var el = document.getElementById(id);
+  if(!el) return;
+  tap(el, function(){
+    var next = stateFn(); // stateFn sets state and returns new bool
+    el.classList.toggle('on', next);
+  });
+}
+function setChk(id, val){
+  var el = document.getElementById(id);
+  if(el) el.classList.toggle('on', !!val);
+}
 
-// ── Weather fetch ────────────────────────────────────────────────
-var wxCache={};
+// ── Weather ───────────────────────────────────────────────────────
+var wxCache = {};
 function fetchWeather(cb){
-  var dk2=dk(nd);
-  if(wxCache[dk2]){cb(wxCache[dk2]);return;}
-  var url='https://api.open-meteo.com/v1/forecast?latitude='+LAT+'&longitude='+LNG+'&current=temperature_2m,relative_humidity_2m,precipitation,surface_pressure&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York';
-  fetch(url).then(function(r){return r.json();}).then(function(d){
-    if(d&&d.current){
-      var w={temp:Math.round(d.current.temperature_2m),humidity:d.current.relative_humidity_2m,precip:d.current.precipitation,pressure:Math.round(d.current.surface_pressure)};
-      wxCache[dk2]=w;cb(w);
-    }else{cb(null);}
-  }).catch(function(){cb(null);});
+  var key = dk(nd);
+  if(wxCache[key]){ cb(wxCache[key]); return; }
+  var url = 'https://api.open-meteo.com/v1/forecast?latitude='+LAT+'&longitude='+LNG
+    +'&current=temperature_2m,relative_humidity_2m,precipitation,surface_pressure'
+    +'&temperature_unit=fahrenheit&timezone=America%2FNew_York';
+  fetch(url)
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if(d && d.current){
+        var w = {temp:Math.round(d.current.temperature_2m), humidity:d.current.relative_humidity_2m,
+                 precip:d.current.precipitation, pressure:Math.round(d.current.surface_pressure)};
+        wxCache[key] = w; cb(w);
+      } else { cb(null); }
+    }).catch(function(){ cb(null); });
 }
 
 function renderWeather(){
-  var pill=document.getElementById('wx-pill');
-  var status=document.getElementById('wx-status');
-  if(!pill)return;
+  var pill = document.getElementById('wx-pill'); if(!pill) return;
   if(mg.weather){
-    var w=mg.weather;
-    pill.innerHTML='<span style="font-size:11px;color:var(--blue);font-weight:500">At time of log:</span>'
-      +'<span class="wx-item">&#127777; '+w.temp+'&deg;F</span>'
-      +'<span class="wx-item">&#128167; '+w.humidity+'%</span>'
-      +'<span class="wx-item">&#9928; '+w.pressure+' hPa</span>'
-      +'<span class="wx-item">&#127783; '+w.precip+'"</span>';
-  }else{
-    status.textContent='Fetching weather...';
+    var w = mg.weather;
+    pill.innerHTML = '<span style="font-size:11px;font-weight:500">At log time:</span>'
+      +'<span class="wx-item">'+w.temp+'&deg;F</span>'
+      +'<span class="wx-item">'+w.humidity+'% humidity</span>'
+      +'<span class="wx-item">'+w.pressure+' hPa</span>'
+      +'<span class="wx-item">'+w.precip+'" precip</span>';
+  } else {
+    pill.innerHTML = '<span class="wx-fetch" id="wx-status">Fetching weather...</span>';
     fetchWeather(function(w){
       if(w){
-        mg.weather=w;
-        pill.innerHTML='<span style="font-size:11px;color:var(--blue);font-weight:500">Now:</span>'
-          +'<span class="wx-item">&#127777; '+w.temp+'&deg;F</span>'
-          +'<span class="wx-item">&#128167; '+w.humidity+'%</span>'
-          +'<span class="wx-item">&#9928; '+w.pressure+' hPa</span>'
-          +'<span class="wx-item">&#127783; '+w.precip+'"</span>';
-      }else{pill.innerHTML='<span class="wx-fetch">Weather unavailable (check connection)</span>';}
+        mg.weather = w;
+        pill.innerHTML = '<span style="font-size:11px;font-weight:500">Now:</span>'
+          +'<span class="wx-item">'+w.temp+'&deg;F</span>'
+          +'<span class="wx-item">'+w.humidity+'% humidity</span>'
+          +'<span class="wx-item">'+w.pressure+' hPa</span>'
+          +'<span class="wx-item">'+w.precip+'" precip</span>';
+      } else {
+        pill.innerHTML = '<span class="wx-fetch">Weather unavailable</span>';
+      }
     });
   }
 }
 
-// ── Render GI ────────────────────────────────────────────────────
-function rW(){
-  var c=document.getElementById('dps');if(!c)return;c.innerHTML='';
-  for(var i=1;i<=8;i++){(function(n){
-    var d=document.createElement('div');d.className='drop'+(n<=gi.water?' on':'');
-    tap(d,function(){gi.water=(gi.water===n)?n-1:n;lset(wk(nd),gi.water);rW();});
-    c.appendChild(d);
-  })(i);}
-  document.getElementById('wc').textContent=gi.water+' / 8';
+// ── Scale dots (generic) ──────────────────────────────────────────
+// Renders numbered dots 1-5 into a container div, reads/writes state[key]
+function renderDots(containerId, state, key){
+  var row = document.getElementById(containerId); if(!row) return;
+  row.innerHTML = '';
+  for(var i=1; i<=5; i++){
+    (function(n){
+      var d = document.createElement('div');
+      d.className = 'dot' + (state[key]===n ? ' a'+n : '');
+      d.textContent = n;
+      tap(d, function(){ state[key] = (state[key]===n) ? 0 : n; renderDots(containerId, state, key); });
+      row.appendChild(d);
+    })(i);
+  }
 }
 
+// For GI symptom scale rows (use data-k attribute)
 function rSym(){
   KS.forEach(function(k){
-    var row=document.querySelector('.sd[data-k="'+k+'"]');if(!row)return;row.innerHTML='';
+    var row = document.querySelector('#tab-gi .sd[data-k="'+k+'"]'); if(!row) return;
+    row.innerHTML = '';
     for(var i=1;i<=5;i++){(function(n){
-      var d=document.createElement('div');d.className='dot'+(gi.sym[k]===n?' a'+n:'');d.textContent=n;
-      tap(d,function(){gi.sym[k]=(gi.sym[k]===n)?0:n;rSym();});
+      var d = document.createElement('div');
+      d.className = 'dot'+(gi.sym[k]===n?' a'+n:'');
+      d.textContent = n;
+      tap(d, function(){ gi.sym[k]=(gi.sym[k]===n)?0:n; rSym(); });
       row.appendChild(d);
     })(i);}
   });
 }
 
-function rBM(){
-  document.getElementById('bmn').textContent=gi.bm;
-  document.querySelectorAll('#bmchips .chip').forEach(function(c){c.className='chip'+(c.dataset.v===gi.bt?' on':'');});
-  var sb=document.getElementById('chk-strain');
-  if(sb)sb.style.background=gi.strain?'var(--grl)':'';
+// ── Render GI ─────────────────────────────────────────────────────
+function rW(){
+  var c = document.getElementById('dps'); if(!c) return;
+  c.innerHTML = '';
+  for(var i=1;i<=8;i++){(function(n){
+    var d = document.createElement('div');
+    d.className = 'drop'+(n<=gi.water?' on':'');
+    tap(d, function(){ gi.water=(gi.water===n)?n-1:n; lset(wk(nd),gi.water); rW(); });
+    c.appendChild(d);
+  })(i);}
+  document.getElementById('wc').textContent = gi.water+' / 8';
 }
 
-function rStress(){
-  document.querySelectorAll('#tab-gi .stress-opt').forEach(function(b){
-    b.className='stress-opt s'+b.dataset.sv+(gi.stress===parseInt(b.dataset.sv,10)?' on':'');
+function rBM(){
+  document.getElementById('bmn').textContent = gi.bm;
+  document.querySelectorAll('#bmchips .chip').forEach(function(c){
+    c.className = 'chip'+(c.dataset.v===gi.bt?' on':'');
+  });
+  setChk('chk-strain', gi.strain);
+}
+
+function rGIStress(){
+  document.querySelectorAll('#gi-stress-opts .stress-opt').forEach(function(b){
+    var v = parseInt(b.dataset.sv, 10);
+    b.classList.toggle('on', gi.stress===v);
   });
 }
 
 function rGERD(){
-  var chips=document.querySelectorAll('#gerd-content .chip');
-  chips.forEach(function(c){c.className='chip'+(gi.gerd.indexOf(c.dataset.v)>=0?' on':'');});
-  var tog=document.getElementById('gerd-toggle');
-  if(tog)tog.className='gerd-toggle'+(gi.gerd.length>0?' has-data':'');
+  document.querySelectorAll('#gerd-content .chip').forEach(function(c){
+    c.className = 'chip'+(gi.gerd.indexOf(c.dataset.v)>=0?' on':'');
+  });
+  var tog = document.getElementById('gerd-toggle');
+  if(tog) tog.className = 'gerd-toggle'+(gi.gerd.length>0?' has-data':'');
 }
 
 function rMeds(){
   document.querySelectorAll('.med-item').forEach(function(b){
-    b.className='med-item'+(gi.meds.indexOf(b.dataset.m)>=0?' on':'');
+    b.className = 'med-item'+(gi.meds.indexOf(b.dataset.m)>=0?' on':'');
   });
 }
 
 function rFood(){
-  var c=document.getElementById('ftags');if(!c)return;c.innerHTML='';
+  var c = document.getElementById('ftags'); if(!c) return;
+  c.innerHTML = '';
   gi.foods.forEach(function(f,i){
-    var t=document.createElement('div');t.className='ftag';
-    var sp=document.createElement('span');sp.textContent=f;
-    var btn=document.createElement('button');btn.innerHTML='&times;';
-    tap(btn,function(){gi.foods.splice(i,1);rFood();});
-    t.appendChild(sp);t.appendChild(btn);c.appendChild(t);
+    var tag = document.createElement('div'); tag.className='ftag';
+    var sp = document.createElement('span'); sp.textContent=f;
+    var btn = document.createElement('button'); btn.innerHTML='&times;';
+    tap(btn, function(){ gi.foods.splice(i,1); rFood(); });
+    tag.appendChild(sp); tag.appendChild(btn); c.appendChild(tag);
   });
 }
 
 function rBadge(){
-  var c=document.getElementById('bdg');if(!c)return;c.innerHTML='';
+  var c = document.getElementById('bdg'); if(!c) return;
+  c.innerHTML = '';
   ['morning','midday','evening'].forEach(function(t){
-    if(lg(gsk(nd,t))){var b=document.createElement('span');b.className='bpill';b.textContent=TL[t]+' saved';c.appendChild(b);}
+    if(lg(gsk(nd,t))){ var b=document.createElement('span'); b.className='bpill'; b.textContent=TL[t]+' saved'; c.appendChild(b); }
   });
 }
 
 function rAllGI(){
-  rW();rSym();rBM();rStress();rGERD();rMeds();rFood();rBadge();
-  var nl=document.getElementById('notes');if(nl)nl.value=gi.notes;
-  var fl=document.getElementById('flbl');if(fl)fl.textContent=FL[curTod]||'Food';
-  document.getElementById('wsec').style.opacity=curTod==='morning'?'1':'0.7';
+  rW(); rSym(); rBM(); rGIStress(); rGERD(); rMeds(); rFood(); rBadge();
+  var nl = document.getElementById('notes'); if(nl) nl.value = gi.notes;
+  var fl = document.getElementById('flbl'); if(fl) fl.textContent = FL[curTod]||'Food';
+  var ws = document.getElementById('wsec'); if(ws) ws.style.opacity = curTod==='morning'?'1':'0.7';
 }
 
-// ── Render Migraine ──────────────────────────────────────────────
+// ── Render Migraine ───────────────────────────────────────────────
+function rMigSevDots(){
+  var row = document.getElementById('msev-dots'); if(!row) return;
+  row.innerHTML = '';
+  for(var i=1;i<=5;i++){(function(n){
+    var d = document.createElement('div');
+    d.className = 'dot'+(mg.sev===n?' a'+n:'');
+    d.textContent = n;
+    tap(d, function(){ mg.sev=(mg.sev===n)?0:n; rMigSevDots(); });
+    row.appendChild(d);
+  })(i);}
+}
+
 function rMig(){
-  var ons=document.getElementById('m-onset');if(ons)ons.value=mg.onset||'';
-  var end=document.getElementById('m-end');if(end)end.value=mg.end||'';
-  // severity dots
-  document.querySelectorAll('.sd[data-k="msev"] .dot, [data-k="msev"]').forEach(function(d){
-    var n=parseInt(d.dataset.n,10);if(!n)return;
-    d.className='dot'+(mg.sev===n?' a'+n:'');
+  var ons = document.getElementById('m-onset'); if(ons && document.activeElement!==ons) ons.value = mg.onset||'';
+  var end = document.getElementById('m-end'); if(end && document.activeElement!==end) end.value = mg.end||'';
+  rMigSevDots();
+  document.querySelectorAll('#m-loc .chip').forEach(function(c){ c.className='chip'+(c.dataset.v===mg.loc?' on-b':''); });
+  document.querySelectorAll('#m-syms .chip').forEach(function(c){ c.className='chip'+(mg.syms.indexOf(c.dataset.v)>=0?' on-b':''); });
+  document.querySelectorAll('#m-prodrome .chip').forEach(function(c){ c.className='chip'+(mg.prodrome.indexOf(c.dataset.v)>=0?' on-b':''); });
+  document.querySelectorAll('#mg-stress-opts .stress-opt').forEach(function(b){
+    b.classList.toggle('on', mg.stress===parseInt(b.dataset.sv,10));
   });
-  // location
-  document.querySelectorAll('#m-loc .chip').forEach(function(c){c.className='chip on-b'.includes(c.dataset.v===mg.loc?'chip on-b':'x')?'chip on-b':'chip';c.className='chip'+(c.dataset.v===mg.loc?' on-b':'');});
-  // syms
-  document.querySelectorAll('#m-syms .chip').forEach(function(c){c.className='chip'+(mg.syms.indexOf(c.dataset.v)>=0?' on-b':'');});
-  // prodrome
-  document.querySelectorAll('#m-prodrome .chip').forEach(function(c){c.className='chip'+(mg.prodrome.indexOf(c.dataset.v)>=0?' on-b':'');});
-  // stress
-  document.querySelectorAll('#m-stress-opts .stress-opt').forEach(function(b){
-    b.className='stress-opt s'+b.dataset.sv+(mg.stress===parseInt(b.dataset.sv,10)?' on':'');
-  });
-  // meds
-  document.querySelectorAll('#m-meds .chip').forEach(function(c){c.className='chip'+(mg.meds.indexOf(c.dataset.v)>=0?' on-b':'');});
-  // medworks
-  var mw=document.getElementById('chk-medworks');if(mw)mw.style.background=mg.medworks?'var(--grl)':'';
-  var nn=document.getElementById('m-numbness');if(nn)nn.value=mg.numbness||'';
-  var mn=document.getElementById('m-notes');if(mn)mn.value=mg.notes||'';
+  document.querySelectorAll('#m-meds .chip').forEach(function(c){ c.className='chip'+(mg.meds.indexOf(c.dataset.v)>=0?' on-b':''); });
+  setChk('chk-medworks', mg.medworks);
+  var nn = document.getElementById('m-numbness'); if(nn && document.activeElement!==nn) nn.value = mg.numbness||'';
+  var mn = document.getElementById('m-notes'); if(mn && document.activeElement!==mn) mn.value = mg.notes||'';
   renderWeather();
 }
 
-// ── Render Sleep ─────────────────────────────────────────────────
-function rSleep(){
-  var bed=document.getElementById('sl-bed');if(bed)bed.value=sl.bed||'';
-  var wake=document.getElementById('sl-wake');if(wake)wake.value=sl.wake||'';
-  // groggy dots
-  document.querySelectorAll('.sd[data-k="groggy"] .dot,[data-k="groggy"]').forEach(function(d){
-    var n=parseInt(d.dataset.n,10);if(!n)return;
-    d.className='dot'+(sl.groggy===n?' a'+n:'');
-  });
-  var nm=document.getElementById('chk-nightmare');if(nm)nm.style.background=sl.nightmare?'var(--grl)':'';
-  var wk2=document.getElementById('chk-waking');if(wk2)wk2.style.background=sl.waking?'var(--grl)':'';
+// ── Render Sleep ──────────────────────────────────────────────────
+function rGroggyDots(){
+  var row = document.getElementById('groggy-dots'); if(!row) return;
+  row.innerHTML = '';
+  for(var i=1;i<=5;i++){(function(n){
+    var d = document.createElement('div');
+    d.className = 'dot'+(sl.groggy===n?' a'+n:'');
+    d.textContent = n;
+    tap(d, function(){ sl.groggy=(sl.groggy===n)?0:n; rGroggyDots(); });
+    row.appendChild(d);
+  })(i);}
 }
 
-// ── Nav label ────────────────────────────────────────────────────
+function rSleep(){
+  var bed = document.getElementById('sl-bed'); if(bed && document.activeElement!==bed) bed.value = sl.bed||'';
+  var wake = document.getElementById('sl-wake'); if(wake && document.activeElement!==wake) wake.value = sl.wake||'';
+  rGroggyDots();
+  setChk('chk-nightmare', sl.nightmare);
+  setChk('chk-waking', sl.waking);
+}
+
+// ── Nav ───────────────────────────────────────────────────────────
 function nfmt(){
-  var diff=Math.round((td-nd)/86400000);
-  if(diff===0)return'Today';if(diff===1)return'Yesterday';
+  var diff = Math.round((td-nd)/86400000);
+  if(diff===0) return 'Today';
+  if(diff===1) return 'Yesterday';
   return nd.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
 }
-
 function updateNav(){
-  document.getElementById('nlbl').textContent=nfmt();
-  var nb=document.getElementById('next');var dis=nd>=td;
-  nb.style.opacity=dis?'0.3':'1';nb.style.pointerEvents=dis?'none':'auto';
+  document.getElementById('nlbl').textContent = nfmt();
+  var nb = document.getElementById('next');
+  var dis = nd >= td;
+  nb.style.opacity = dis?'0.3':'1';
+  nb.style.pointerEvents = dis?'none':'auto';
 }
 
-// ── Load day ─────────────────────────────────────────────────────
+// ── Load ──────────────────────────────────────────────────────────
 function loadGI(){
-  rstGI();
-  var w=lg(wk(nd));gi.water=w||0;
-  var e=lg(gsk(nd,curTod));
-  if(e){if(e.sym)Object.assign(gi.sym,e.sym);gi.bm=e.bm||0;gi.bt=e.bt||null;gi.strain=!!e.strain;gi.stress=e.stress!==undefined?e.stress:-1;gi.gerd=e.gerd||[];gi.meds=e.meds||[];gi.foods=e.foods||[];gi.notes=e.notes||'';}
+  gi = mkGI();
+  var w = lg(wk(nd)); gi.water = w||0;
+  var e = lg(gsk(nd,curTod));
+  if(e){ if(e.sym) Object.assign(gi.sym,e.sym); gi.bm=e.bm||0; gi.bt=e.bt||null; gi.strain=!!e.strain; gi.stress=e.stress!==undefined?e.stress:-1; gi.gerd=e.gerd||[]; gi.meds=e.meds||[]; gi.foods=e.foods||[]; gi.notes=e.notes||''; }
   rAllGI();
 }
-
 function loadMG(){
-  rstMG();
-  var e=lg(msk(nd));
-  if(e)Object.assign(mg,e);
+  mg = mkMG();
+  var e = lg(msk(nd)); if(e) Object.assign(mg,e);
   rMig();
 }
-
 function loadSL(){
-  rstSL();
-  var e=lg(slk(nd));
-  if(e)Object.assign(sl,e);
+  sl = mkSL();
+  var e = lg(slk(nd)); if(e) Object.assign(sl,e);
   rSleep();
 }
+function loadAll(){ updateNav(); loadGI(); loadMG(); loadSL(); }
 
-function loadAll(){updateNav();loadGI();loadMG();loadSL();}
-
-// ── Tab switching ────────────────────────────────────────────────
+// ── Tab switching ─────────────────────────────────────────────────
 function showTab(t){
-  curTab=t;
-  document.querySelectorAll('.tab').forEach(function(b){b.className='tab'+(b.dataset.tab===t?' on':'');});
-  document.getElementById('tab-gi').style.display=t==='gi'?'':'none';
-  document.getElementById('tab-migraine').style.display=t==='migraine'?'':'none';
-  document.getElementById('tab-sleep').style.display=t==='sleep'?'':'none';
-  if(t==='migraine'){renderWeather();}
+  curTab = t;
+  document.querySelectorAll('.tab').forEach(function(b){ b.className='tab'+(b.dataset.tab===t?' on':''); });
+  document.getElementById('tab-gi').style.display = t==='gi'?'':'none';
+  document.getElementById('tab-migraine').style.display = t==='migraine'?'':'none';
+  document.getElementById('tab-sleep').style.display = t==='sleep'?'':'none';
+  if(t==='migraine') renderWeather();
 }
 
-// ── Toast ────────────────────────────────────────────────────────
-function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2400);}
+// ── Toast ─────────────────────────────────────────────────────────
+function toast(m){ var t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); setTimeout(function(){ t.classList.remove('show'); },2400); }
 
-// ── Friday export reminder ───────────────────────────────────────
+// ── Friday banner ─────────────────────────────────────────────────
 function checkFridayBanner(){
-  var now=new Date();
+  var now = new Date();
   if(now.getDay()===5){
-    var bannerKey='gl5-export-dismissed-'+dk(now);
-    if(!lg(bannerKey)){document.getElementById('export-banner').style.display='flex';}
+    var key = 'gl5-export-dismissed-'+dk(now);
+    if(!lg(key)) document.getElementById('export-banner').style.display='flex';
   }
 }
 
-// ── CSV Export ───────────────────────────────────────────────────
+// ── CSV Export ────────────────────────────────────────────────────
 function exportCSV(){
-  var rows=[['Date','Slot','Type','Water','BM_Count','BM_Type','Straining','Hollow','Pain','Bloat','Aches','Nausea','Energy','Stress','GERD_Symptoms','Meds','Foods','Notes','Migraine_Onset','Migraine_End','Migraine_Sev','Migraine_Location','Migraine_Symptoms','Migraine_Prodrome','Migraine_Stress','Migraine_Meds','Migraine_Med_Helped','Migraine_Numbness','Migraine_Notes','Weather_Temp_F','Weather_Humidity','Weather_Pressure_hPa','Weather_Precip_in','Sleep_Bed','Sleep_Wake','Sleep_Groggy','Nightmare','Mid_Night_Waking']];
+  var rows=[['Date','Slot','Water','BM_Count','BM_Type','Straining','Hollow','Pain','Bloat','Aches','Nausea','Energy','Stress','GERD','Meds','Foods','Notes','Migraine_Onset','Migraine_End','Migraine_Sev','Migraine_Location','Migraine_Symptoms','Migraine_Prodrome','Migraine_Stress','Migraine_Meds','Migraine_Med_Helped','Migraine_Numbness','Migraine_Notes','Weather_Temp_F','Weather_Humidity','Weather_Pressure_hPa','Weather_Precip_in','Sleep_Bed','Sleep_Wake','Sleep_Groggy','Nightmare','Mid_Night_Waking']];
   var days={};
   try{
     for(var i=0;i<localStorage.length;i++){
-      var k=localStorage.key(i);
-      if(k&&k.startsWith('gl5-')){
-        var parts=k.replace('gl5-','').split('-');
-        var type=parts[0];
-        if(type==='gi'){
-          var ds=parts[1]+'-'+parts[2]+'-'+parts[3];
-          var slot=parts[4];
-          if(!days[ds])days[ds]={};
-          if(!days[ds].gi)days[ds].gi={};
-          days[ds].gi[slot]=lg(k);
-        }else if(type==='mg'){
-          var ds2=parts[1]+'-'+parts[2]+'-'+parts[3];
-          if(!days[ds2])days[ds2]={};
-          days[ds2].mg=lg(k);
-        }else if(type==='sl'){
-          var ds3=parts[1]+'-'+parts[2]+'-'+parts[3];
-          if(!days[ds3])days[ds3]={};
-          days[ds3].sl=lg(k);
-        }else if(type==='w'){
-          var ds4=parts[1]+'-'+parts[2]+'-'+parts[3];
-          if(!days[ds4])days[ds4]={};
-          days[ds4].water=lg(k);
-        }
-      }
+      var k=localStorage.key(i); if(!k||!k.startsWith('gl5-')) continue;
+      var pts=k.replace('gl5-','').split('-');
+      var type=pts[0];
+      var ds3=pts[1]+'-'+pts[2]+'-'+pts[3];
+      if(!days[ds3]) days[ds3]={};
+      if(type==='gi'){ if(!days[ds3].gi) days[ds3].gi={}; days[ds3].gi[pts[4]]=lg(k); }
+      else if(type==='mg') days[ds3].mg=lg(k);
+      else if(type==='sl') days[ds3].sl=lg(k);
+      else if(type==='w') days[ds3].water=lg(k);
     }
-  }catch(e){}
-
+  }catch(ex){}
   var dateKeys=Object.keys(days).sort();
   dateKeys.forEach(function(ds){
-    var day=days[ds];
-    var water=day.water||0;
-    var hasMG=!!day.mg;
-    var hasSL=!!day.sl;
-    // GI rows
+    var day=days[ds]; var water=day.water||0;
+    var m=day.mg||{}; var s=day.sl||{}; var wx=m.weather||{};
+    var mgDone=false;
     ['morning','midday','evening'].forEach(function(slot){
       var g=day.gi&&day.gi[slot];
-      if(!g&&!hasMG&&!hasSL)return;
-      var m=hasMG?day.mg:{};
-      var s=hasSL?day.sl:{};
-      var wx=m.weather||{};
+      if(!g && mgDone) return;
       var row=[
-        ds,slot,'gi',water,
-        g?g.bm:'',g?g.bt:'',g?g.strain:'',
-        g&&g.sym?g.sym.hollow:'',g&&g.sym?g.sym.pain:'',g&&g.sym?g.sym.bloat:'',g&&g.sym?g.sym.ache:'',g&&g.sym?g.sym.nausea:'',g&&g.sym?g.sym.energy:'',
-        g&&g.stress>=0?STRESS_LABELS[g.stress]:'',
-        g?(g.gerd||[]).join('|'):'',g?(g.meds||[]).join('|'):'',g?(g.foods||[]).join('|'):'',g?g.notes:'',
-        m.onset||'',m.end||'',m.sev||'',m.loc||'',(m.syms||[]).join('|'),(m.prodrome||[]).join('|'),m.stress>=0?STRESS_LABELS[m.stress]:'',(m.meds||[]).join('|'),m.medworks?'yes':'',m.numbness||'',m.notes||'',
-        wx.temp||'',wx.humidity||'',wx.pressure||'',wx.precip||'',
-        s.bed||'',s.wake||'',s.groggy||'',s.nightmare?'yes':'',s.waking?'yes':''
+        ds, slot, water,
+        g?g.bm:'', g?g.bt:'', g&&g.strain?'yes':'',
+        g&&g.sym?g.sym.hollow:'', g&&g.sym?g.sym.pain:'', g&&g.sym?g.sym.bloat:'',
+        g&&g.sym?g.sym.ache:'', g&&g.sym?g.sym.nausea:'', g&&g.sym?g.sym.energy:'',
+        g&&g.stress>=0?SL[g.stress]:'',
+        g?(g.gerd||[]).join('|'):'', g?(g.meds||[]).join('|'):'', g?(g.foods||[]).join('|'):'', g?g.notes:'',
+        !mgDone?m.onset||'':'', !mgDone?m.end||'':'', !mgDone?m.sev||'':'', !mgDone?m.loc||'':'',
+        !mgDone?(m.syms||[]).join('|'):'', !mgDone?(m.prodrome||[]).join('|'):'',
+        !mgDone&&m.stress>=0?SL[m.stress]:'', !mgDone?(m.meds||[]).join('|'):'',
+        !mgDone?m.medworks?'yes':'':'', !mgDone?m.numbness||'':'', !mgDone?m.notes||'':'',
+        !mgDone?wx.temp||'':'', !mgDone?wx.humidity||'':'', !mgDone?wx.pressure||'':'', !mgDone?wx.precip||'':'',
+        s.bed||'', s.wake||'', s.groggy||'', s.nightmare?'yes':'', s.waking?'yes':''
       ];
-      // escape
-      row=row.map(function(v){var s2=String(v);return s2.indexOf(',')>=0||s2.indexOf('"')>=0?'"'+s2.replace(/"/g,'""')+'"':s2;});
-      rows.push(row);
-      hasMG=false;hasSL=false; // only add once per day
+      row=row.map(function(v){var sv=String(v); return (sv.indexOf(',')>=0||sv.indexOf('"')>=0)?'"'+sv.replace(/"/g,'""')+'"':sv;});
+      rows.push(row); mgDone=true;
     });
   });
-
   var csv=rows.map(function(r){return r.join(',');}).join('\n');
   var blob=new Blob([csv],{type:'text/csv'});
   var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');
-  a.href=url;a.download='gut-log-'+dk(new Date())+'.csv';
-  document.body.appendChild(a);a.click();
-  document.body.removeChild(a);URL.revokeObjectURL(url);
+  var a=document.createElement('a'); a.href=url; a.download='gut-log-'+dk(new Date())+'.csv';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
   toast('CSV downloaded');
-
-  // Dismiss Friday banner
   lset('gl5-export-dismissed-'+dk(new Date()),true);
   document.getElementById('export-banner').style.display='none';
 }
 
-// ── History render ───────────────────────────────────────────────
-function rHist(){
-  var p=document.getElementById('hp');if(!p)return;
+// ── History (shared across all tabs) ─────────────────────────────
+function loadAllDays(){
   var days={};
   try{
     for(var i=0;i<localStorage.length;i++){
-      var k=localStorage.key(i);
-      if(!k||!k.startsWith('gl5-'))continue;
+      var k=localStorage.key(i); if(!k||!k.startsWith('gl5-')) continue;
       var pts=k.replace('gl5-','').split('-');
-      var type=pts[0];
-      if(type==='gi'){var ds=pts[1]+'-'+pts[2]+'-'+pts[3];var slot=pts[4];if(!days[ds])days[ds]={gi:{}};if(!days[ds].gi)days[ds].gi={};days[ds].gi[slot]=lg(k);}
-      else if(type==='mg'){var ds2=pts[1]+'-'+pts[2]+'-'+pts[3];if(!days[ds2])days[ds2]={};days[ds2].mg=lg(k);}
-      else if(type==='sl'){var ds3=pts[1]+'-'+pts[2]+'-'+pts[3];if(!days[ds3])days[ds3]={};days[ds3].sl=lg(k);}
-      else if(type==='w'){var ds4=pts[1]+'-'+pts[2]+'-'+pts[3];if(!days[ds4])days[ds4]={};days[ds4].water=lg(k);}
+      var type=pts[0]; var ds=pts[1]+'-'+pts[2]+'-'+pts[3];
+      if(!days[ds]) days[ds]={};
+      if(type==='gi'){ if(!days[ds].gi) days[ds].gi={}; days[ds].gi[pts[4]]=lg(k); }
+      else if(type==='mg') days[ds].mg=lg(k);
+      else if(type==='sl') days[ds].sl=lg(k);
+      else if(type==='w') days[ds].water=lg(k);
     }
-  }catch(e){}
+  }catch(ex){}
+  return days;
+}
+
+function rHist(panelId, filter){
+  var p=document.getElementById(panelId); if(!p) return;
+  var days=loadAllDays();
   var ks=Object.keys(days).sort().reverse();
-  if(!ks.length){p.innerHTML='<p class="hempty">No entries yet.</p>';return;}
-  p.innerHTML=ks.slice(0,14).map(function(ds){
+  if(!ks.length){ p.innerHTML='<p class="hempty">No entries yet.</p>'; return; }
+  p.innerHTML=ks.slice(0,21).map(function(ds){
     var day=days[ds];
     var d=new Date(ds+'T12:00:00');
     var lbl=d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
     var hasMig=day.mg&&(day.mg.onset||day.mg.sev);
     var migFlag=hasMig?'<span class="migraine-flag">migraine</span>':'';
-    var w=day.water||0;
-    var ws=w?'&#128167;'+w+'/8 &nbsp;':'';
-    var slStr='';
-    if(day.sl&&(day.sl.bed||day.sl.wake)){slStr='&#128164; '+( day.sl.bed||'?')+' &rarr; '+(day.sl.wake||'?')+(day.sl.groggy?' groggy:'+day.sl.groggy+'/5':'')+(day.sl.nightmare?' nightmare':'')+(day.sl.waking?' mid-waking':'')+'<br>';}
-    var gi_html=['morning','midday','evening'].filter(function(t){return day.gi&&day.gi[t];}).map(function(t){
-      var e=day.gi[t];
-      var sy=KS.filter(function(k2){return e.sym&&e.sym[k2]>0;}).map(function(k2){return KL[k2]+':'+e.sym[k2];}).join(' | ');
-      return '<div class="ht">'+TL[t]+'</div><div class="hl">'+(e.bm>0?'BM:'+e.bm+'x '+(e.bt||'')+(e.strain?' (straining)':'')+'<br>':'')+(sy?sy+'<br>':'')+(e.stress>=0?'Stress: '+STRESS_LABELS[e.stress]+'<br>':'')+(e.gerd&&e.gerd.length?'GERD: '+e.gerd.join(', ')+'<br>':'')+(e.foods&&e.foods.length?'<span style="color:var(--mu);font-size:11px">'+e.foods.join(', ')+'</span><br>':'')+'</div>';
-    }).join('');
+    var w=day.water||0; var ws=w?'<br>Water: '+w+'/8':'';
+
+    var gi_html='';
+    if(!filter||filter==='gi'){
+      gi_html=['morning','midday','evening'].filter(function(t){return day.gi&&day.gi[t];}).map(function(t){
+        var e=day.gi[t];
+        var sy=KS.filter(function(k2){return e.sym&&e.sym[k2]>0;}).map(function(k2){return KL[k2]+' '+e.sym[k2];}).join(', ');
+        return '<div class="ht">'+TL[t]+'</div><div class="hl">'
+          +(e.bm>0?'BM: '+e.bm+'&times; '+(e.bt||'')+(e.strain?' (straining)':'')+'<br>':'')
+          +(sy?sy+'<br>':'')
+          +(e.stress>=0?'Stress: '+SL[e.stress]+'<br>':'')
+          +(e.gerd&&e.gerd.length?'GERD: '+e.gerd.join(', ')+'<br>':'')
+          +(e.foods&&e.foods.length?'<span style="color:var(--mu);font-size:11px">'+e.foods.join(', ')+'</span>':'')
+          +'</div>';
+      }).join('');
+    }
+
     var mg_html='';
-    if(hasMig){var m=day.mg;mg_html='<div class="hem">Migraine</div><div class="hl">'+(m.onset?m.onset:''+(m.end?' &rarr; '+m.end:''))+'<br>'+(m.sev?'Severity: '+m.sev+'/5<br>':'')+(m.loc?'Side: '+m.loc+'<br>':'')+(m.syms&&m.syms.length?m.syms.join(', ')+'<br>':'')+(m.weather?'&#9928;'+m.weather.pressure+'hPa &#127777;'+m.weather.temp+'F<br>':'')+'</div>';}
-    return '<div class="he"><div class="hed">'+lbl+migFlag+'&nbsp; '+ws+'</div>'+slStr+gi_html+mg_html+'</div>';
-  }).join('');
+    if((!filter||filter==='migraine') && hasMig){
+      var m=day.mg;
+      mg_html='<div class="hem">Migraine</div><div class="hl">'
+        +(m.onset?'Onset: '+m.onset+(m.end?' &rarr; '+m.end:'')+'<br>':'')
+        +(m.sev?'Severity: '+m.sev+'/5<br>':'')
+        +(m.loc?'Location: '+m.loc+'<br>':'')
+        +(m.syms&&m.syms.length?m.syms.join(', ')+'<br>':'')
+        +(m.stress>=0?'Stress: '+SL[m.stress]+'<br>':'')
+        +(m.meds&&m.meds.length?'Meds: '+m.meds.join(', ')+(m.medworks?' (helped)':'')+'<br>':'')
+        +(m.numbness?'Numbness: '+m.numbness+'<br>':'')
+        +(m.weather?'Weather: '+m.weather.temp+'F, '+m.weather.humidity+'% humidity, '+m.weather.pressure+' hPa, '+m.weather.precip+'" precip<br>':'')
+        +(m.notes?'<span style="color:var(--mu);font-size:11px">'+m.notes+'</span>':'')
+        +'</div>';
+    }
+
+    var sl_html='';
+    if(!filter||filter==='sleep'){
+      var s=day.sl;
+      if(s&&(s.bed||s.wake||s.groggy)){
+        sl_html='<div class="hem">Sleep</div><div class="hl">'
+          +(s.bed||s.wake?'Bed: '+(s.bed||'?')+' &rarr; Wake: '+(s.wake||'?')+'<br>':'')
+          +(s.groggy?'Groggy: '+s.groggy+'/5<br>':'')
+          +(s.nightmare?'Nightmare<br>':'')
+          +(s.waking?'Mid-night waking<br>':'')
+          +'</div>';
+      }
+    }
+
+    if(!gi_html && !mg_html && !sl_html) return '';
+    return '<div class="he"><div class="hed">'+lbl+migFlag+ws+'</div>'+gi_html+mg_html+sl_html+'</div>';
+  }).filter(Boolean).join('');
+  if(!p.innerHTML) p.innerHTML='<p class="hempty">No entries yet.</p>';
 }
 
-// ── Wire all events ──────────────────────────────────────────────
+// ── Wire events ───────────────────────────────────────────────────
 
 // Tabs
 document.querySelectorAll('.tab').forEach(function(b){
-  tap(b,function(){showTab(b.dataset.tab);});
+  tap(b, function(){ showTab(b.dataset.tab); });
 });
 
 // Date nav
-tap(document.getElementById('prev'),function(){nd=new Date(nd);nd.setDate(nd.getDate()-1);loadAll();});
-tap(document.getElementById('next'),function(){if(nd<td){nd=new Date(nd);nd.setDate(nd.getDate()+1);loadAll();}});
+tap(document.getElementById('prev'), function(){ nd=new Date(nd); nd.setDate(nd.getDate()-1); loadAll(); });
+tap(document.getElementById('next'), function(){ if(nd<td){ nd=new Date(nd); nd.setDate(nd.getDate()+1); loadAll(); } });
 
-// TOD buttons
+// TOD
 document.querySelectorAll('.tb').forEach(function(b){
-  tap(b,function(){
-    document.querySelectorAll('.tb').forEach(function(x){x.classList.remove('on');});
-    b.classList.add('on');curTod=b.dataset.t;loadGI();
+  tap(b, function(){
+    document.querySelectorAll('.tb').forEach(function(x){ x.classList.remove('on'); });
+    b.classList.add('on'); curTod=b.dataset.t; loadGI();
   });
 });
 
-// GI symptoms
-KS.forEach(function(k){
-  var row=document.querySelector('.sd[data-k="'+k+'"]');if(!row)return;
-  // dots rendered dynamically in rSym
-});
-
 // BM
-tap(document.getElementById('bmminus'),function(){if(gi.bm>0){gi.bm--;rBM();}});
-tap(document.getElementById('bmplus'),function(){gi.bm++;rBM();});
+tap(document.getElementById('bmminus'), function(){ if(gi.bm>0){ gi.bm--; rBM(); } });
+tap(document.getElementById('bmplus'),  function(){ gi.bm++; rBM(); });
 document.querySelectorAll('#bmchips .chip').forEach(function(c){
-  tap(c,function(){gi.bt=(gi.bt===c.dataset.v)?null:c.dataset.v;rBM();});
+  tap(c, function(){ gi.bt=(gi.bt===c.dataset.v)?null:c.dataset.v; rBM(); });
 });
-tap(document.getElementById('chk-strain'),function(){gi.strain=!gi.strain;rBM();});
+tap(document.getElementById('chk-strain'), function(){ gi.strain=!gi.strain; setChk('chk-strain',gi.strain); });
 
-// Stress (GI)
-document.querySelectorAll('#tab-gi .stress-opt').forEach(function(b){
-  tap(b,function(){var v=parseInt(b.dataset.sv,10);gi.stress=(gi.stress===v)?-1:v;rStress();});
+// GI stress
+document.querySelectorAll('#gi-stress-opts .stress-opt').forEach(function(b){
+  tap(b, function(){ var v=parseInt(b.dataset.sv,10); gi.stress=(gi.stress===v)?-1:v; rGIStress(); });
 });
 
-// GERD
-tap(document.getElementById('gerd-toggle'),function(){
+// GERD toggle
+tap(document.getElementById('gerd-toggle'), function(){
   var c=document.getElementById('gerd-content');
   var a=document.getElementById('gerd-arrow');
   var open=c.classList.toggle('open');
   a.textContent=open?'\u2212':'+';
 });
 document.querySelectorAll('#gerd-content .chip').forEach(function(c){
-  tap(c,function(){
-    var v=c.dataset.v,idx=gi.gerd.indexOf(v);
-    if(idx>=0)gi.gerd.splice(idx,1);else gi.gerd.push(v);
+  tap(c, function(){
+    var v=c.dataset.v, idx=gi.gerd.indexOf(v);
+    if(idx>=0) gi.gerd.splice(idx,1); else gi.gerd.push(v);
     rGERD();
   });
 });
 
-// Meds
+// Meds grid
 document.querySelectorAll('.med-item').forEach(function(b){
-  tap(b,function(){
-    var v=b.dataset.m,idx=gi.meds.indexOf(v);
-    if(idx>=0)gi.meds.splice(idx,1);else gi.meds.push(v);
+  tap(b, function(){
+    var v=b.dataset.m, idx=gi.meds.indexOf(v);
+    if(idx>=0) gi.meds.splice(idx,1); else gi.meds.push(v);
     rMeds();
   });
 });
 
 // Food
-function addF(){var i=document.getElementById('fi'),v=i.value.trim();if(v){gi.foods.push(v);i.value='';rFood();}}
-tap(document.getElementById('addf'),addF);
-document.getElementById('fi').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();addF();}});
+function addF(){ var i=document.getElementById('fi'), v=i.value.trim(); if(v){ gi.foods.push(v); i.value=''; rFood(); } }
+tap(document.getElementById('addf'), addF);
+document.getElementById('fi').addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); addF(); } });
 
 // GI save
-tap(document.getElementById('savebtn'),function(){
-  gi.notes=document.getElementById('notes').value;
-  lset(gsk(nd,curTod),{sym:Object.assign({},gi.sym),bm:gi.bm,bt:gi.bt,strain:gi.strain,stress:gi.stress,gerd:gi.gerd.slice(),meds:gi.meds.slice(),foods:gi.foods.slice(),notes:gi.notes});
-  lset(wk(nd),gi.water);
-  toast('Saved');rBadge();
-  if(document.getElementById('hp').classList.contains('open'))rHist();
+tap(document.getElementById('savebtn'), function(){
+  gi.notes = document.getElementById('notes').value;
+  lset(gsk(nd,curTod), {sym:Object.assign({},gi.sym),bm:gi.bm,bt:gi.bt,strain:gi.strain,stress:gi.stress,gerd:gi.gerd.slice(),meds:gi.meds.slice(),foods:gi.foods.slice(),notes:gi.notes});
+  lset(wk(nd), gi.water);
+  toast('Saved'); rBadge();
+  var hp=document.getElementById('hp'); if(hp.classList.contains('open')) rHist('hp','gi');
 });
 
-// Migraine dots
-document.querySelectorAll('[data-k="msev"]').forEach(function(row){
-  // these are rendered statically in HTML, tap on each dot
+// GI History
+tap(document.getElementById('htog'), function(){
+  var p=document.getElementById('hp'), b=document.getElementById('htog');
+  var o=p.classList.toggle('open'); b.textContent=o?'History ^':'History';
+  if(o) rHist('hp','gi');
 });
-document.querySelectorAll('.sd[data-k="msev"] .dot, .dot[data-k="msev"]').forEach(function(d){
-  tap(d,function(){var n=parseInt(d.dataset.n,10);mg.sev=(mg.sev===n)?0:n;rMig();});
-});
-// Wire static migraine dots directly
-(function(){
-  var msevDots=document.querySelectorAll('.sd[data-k="msev"] .dot');
-  msevDots.forEach(function(d){
-    tap(d,function(){var n=parseInt(d.dataset.n,10);mg.sev=(mg.sev===n)?0:n;rMig();});
-  });
-})();
 
+// Migraine
 document.querySelectorAll('#m-loc .chip').forEach(function(c){
-  tap(c,function(){mg.loc=(mg.loc===c.dataset.v)?null:c.dataset.v;rMig();});
+  tap(c, function(){ mg.loc=(mg.loc===c.dataset.v)?null:c.dataset.v; rMig(); });
 });
 document.querySelectorAll('#m-syms .chip').forEach(function(c){
-  tap(c,function(){var v=c.dataset.v,i=mg.syms.indexOf(v);if(i>=0)mg.syms.splice(i,1);else mg.syms.push(v);rMig();});
+  tap(c, function(){ var v=c.dataset.v, i=mg.syms.indexOf(v); if(i>=0) mg.syms.splice(i,1); else mg.syms.push(v); rMig(); });
 });
 document.querySelectorAll('#m-prodrome .chip').forEach(function(c){
-  tap(c,function(){var v=c.dataset.v,i=mg.prodrome.indexOf(v);if(i>=0)mg.prodrome.splice(i,1);else mg.prodrome.push(v);rMig();});
+  tap(c, function(){ var v=c.dataset.v, i=mg.prodrome.indexOf(v); if(i>=0) mg.prodrome.splice(i,1); else mg.prodrome.push(v); rMig(); });
 });
-document.querySelectorAll('#m-stress-opts .stress-opt').forEach(function(b){
-  tap(b,function(){var v=parseInt(b.dataset.sv,10);mg.stress=(mg.stress===v)?-1:v;rMig();});
+document.querySelectorAll('#mg-stress-opts .stress-opt').forEach(function(b){
+  tap(b, function(){ var v=parseInt(b.dataset.sv,10); mg.stress=(mg.stress===v)?-1:v; rMig(); });
 });
 document.querySelectorAll('#m-meds .chip').forEach(function(c){
-  tap(c,function(){var v=c.dataset.v,i=mg.meds.indexOf(v);if(i>=0)mg.meds.splice(i,1);else mg.meds.push(v);rMig();});
+  tap(c, function(){ var v=c.dataset.v, i=mg.meds.indexOf(v); if(i>=0) mg.meds.splice(i,1); else mg.meds.push(v); rMig(); });
 });
-tap(document.getElementById('chk-medworks'),function(){mg.medworks=!mg.medworks;rMig();});
+tap(document.getElementById('chk-medworks'), function(){ mg.medworks=!mg.medworks; setChk('chk-medworks',mg.medworks); });
 
 // Migraine save
-tap(document.getElementById('m-savebtn'),function(){
-  mg.onset=document.getElementById('m-onset').value;
-  mg.end=document.getElementById('m-end').value;
-  mg.numbness=document.getElementById('m-numbness').value;
-  mg.notes=document.getElementById('m-notes').value;
-  // Stamp weather if not already captured
-  if(!mg.weather){
-    fetchWeather(function(w){mg.weather=w;lset(msk(nd),mg);toast('Migraine saved');renderWeather();});
-  }else{lset(msk(nd),mg);toast('Migraine saved');}
+tap(document.getElementById('m-savebtn'), function(){
+  mg.onset = document.getElementById('m-onset').value;
+  mg.end   = document.getElementById('m-end').value;
+  mg.numbness = document.getElementById('m-numbness').value;
+  mg.notes    = document.getElementById('m-notes').value;
+  function doSave(){ lset(msk(nd),mg); toast('Migraine saved'); var hp2=document.getElementById('mhp'); if(hp2&&hp2.classList.contains('open')) rHist('mhp','migraine'); }
+  if(!mg.weather){ fetchWeather(function(w){ mg.weather=w; renderWeather(); doSave(); }); } else { doSave(); }
 });
 
-// Sleep dots
-(function(){
-  var gdots=document.querySelectorAll('.sd[data-k="groggy"] .dot');
-  gdots.forEach(function(d){
-    tap(d,function(){var n=parseInt(d.dataset.n,10);sl.groggy=(sl.groggy===n)?0:n;rSleep();});
-  });
-})();
-tap(document.getElementById('chk-nightmare'),function(){sl.nightmare=!sl.nightmare;rSleep();});
-tap(document.getElementById('chk-waking'),function(){sl.waking=!sl.waking;rSleep();});
+// Migraine history
+tap(document.getElementById('mhtog'), function(){
+  var p=document.getElementById('mhp'), b=document.getElementById('mhtog');
+  var o=p.classList.toggle('open'); b.textContent=o?'History ^':'History';
+  if(o) rHist('mhp','migraine');
+});
+
+// Sleep checkboxes
+tap(document.getElementById('chk-nightmare'), function(){ sl.nightmare=!sl.nightmare; setChk('chk-nightmare',sl.nightmare); });
+tap(document.getElementById('chk-waking'),    function(){ sl.waking=!sl.waking; setChk('chk-waking',sl.waking); });
 
 // Sleep save
-tap(document.getElementById('sl-savebtn'),function(){
-  sl.bed=document.getElementById('sl-bed').value;
-  sl.wake=document.getElementById('sl-wake').value;
-  lset(slk(nd),sl);
+tap(document.getElementById('sl-savebtn'), function(){
+  sl.bed  = document.getElementById('sl-bed').value;
+  sl.wake = document.getElementById('sl-wake').value;
+  lset(slk(nd), sl);
   toast('Sleep saved');
+  var hp3=document.getElementById('slhp'); if(hp3&&hp3.classList.contains('open')) rHist('slhp','sleep');
 });
 
-// Export buttons
-tap(document.getElementById('expbtn'),exportCSV);
-tap(document.getElementById('m-expbtn'),exportCSV);
-tap(document.getElementById('export-banner-btn'),exportCSV);
-
-// History
-tap(document.getElementById('htog'),function(){
-  var p=document.getElementById('hp'),b=document.getElementById('htog');
-  var o=p.classList.toggle('open');b.textContent=o?'History ^':'History';if(o)rHist();
+// Sleep history
+tap(document.getElementById('slhtog'), function(){
+  var p=document.getElementById('slhp'), b=document.getElementById('slhtog');
+  var o=p.classList.toggle('open'); b.textContent=o?'History ^':'History';
+  if(o) rHist('slhp','sleep');
 });
 
-// ── Init ─────────────────────────────────────────────────────────
-var now=new Date();
-document.getElementById('cdate').textContent=now.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
-var h=now.getHours();curTod=h<12?'morning':h<17?'midday':'evening';
-document.querySelectorAll('.tb').forEach(function(b){b.classList.toggle('on',b.dataset.t===curTod);});
+// Export
+tap(document.getElementById('expbtn'),   exportCSV);
+tap(document.getElementById('m-expbtn'), exportCSV);
+tap(document.getElementById('export-banner-btn'), exportCSV);
+
+// ── Init ──────────────────────────────────────────────────────────
+var now = new Date();
+document.getElementById('cdate').textContent = now.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+var h = now.getHours(); curTod = h<12?'morning':h<17?'midday':'evening';
+document.querySelectorAll('.tb').forEach(function(b){ b.classList.toggle('on',b.dataset.t===curTod); });
 checkFridayBanner();
 loadAll();
 
