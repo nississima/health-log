@@ -29,13 +29,11 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
 .sl{font-size:10px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--mu);margin-bottom:11px;}
 .sl.blue{color:var(--blue);}
 .sl.purple{color:var(--purple);}
-/* Water drops */
-.wr{display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
-.dps{display:flex;gap:6px;flex-wrap:wrap;}
-.drop{width:32px;height:32px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:1.5px solid var(--ac);background:transparent;cursor:pointer;touch-action:manipulation;flex-shrink:0;transition:background .12s;}
-.drop.on{background:var(--ac);}
-#wc{font-size:12px;color:var(--mu);margin-left:3px;}
-/* TOD selector */
+/* Water */
+.water-input{width:90px;padding:9px 11px;border:1.5px solid var(--ac);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:18px;font-weight:500;background:var(--sand);color:var(--ink);outline:none;-webkit-appearance:none;text-align:center;min-height:44px;}
+.water-input:focus{border-color:var(--ink);}
+.water-unit{font-size:13px;color:var(--mu);}
+/* TOD */
 .trow{display:flex;gap:7px;margin-bottom:10px;}
 .tb{flex:1;padding:8px 4px;border-radius:10px;border:1.5px solid var(--rule);background:none;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--mu);cursor:pointer;text-align:center;touch-action:manipulation;min-height:46px;line-height:1.3;}
 .tb.on{background:var(--acl);border-color:var(--ac);color:var(--ac);font-weight:500;}
@@ -47,7 +45,7 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
 .sr:last-child{margin-bottom:0;}
 .sn{font-size:13px;width:112px;flex-shrink:0;line-height:1.3;}
 .sd{display:flex;gap:5px;}
-.dot{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--rule);background:transparent;cursor:pointer;font-size:12px;font-weight:500;color:var(--mu);display:flex;align-items:center;justify-content:center;touch-action:manipulation;flex-shrink:0;}
+.dot{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--rule);background:transparent;cursor:pointer;font-size:12px;font-weight:500;color:var(--mu);display:flex;align-items:center;justify-content:center;touch-action:manipulation;flex-shrink:0;-webkit-appearance:none;border:1.5px solid var(--rule);}
 .dot.a1{background:var(--grl);border-color:var(--gr);color:var(--gr);}
 .dot.a2{background:#E8F0D0;border-color:#8FAB5F;color:#6B7E45;}
 .dot.a3{background:#FBF0DC;border-color:#D4A855;color:#A07A2A;}
@@ -59,29 +57,36 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
 .chip{padding:8px 12px;border-radius:20px;font-size:12px;border:1.5px solid var(--rule);background:none;color:var(--mu);cursor:pointer;font-family:'DM Sans',sans-serif;touch-action:manipulation;min-height:42px;display:flex;align-items:center;white-space:nowrap;}
 .chip.on{background:var(--acl);border-color:var(--ac);color:var(--ac);font-weight:500;}
 .chip.on-b{background:var(--bluel);border-color:var(--blue);color:var(--blue);font-weight:500;}
-/* Checkboxes — empty box by default, checkmark via ::after when .on */
+/* Checkboxes */
 .chk-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
 .chk-row:last-child{margin-bottom:0;}
-.chk-box{width:26px;height:26px;border-radius:5px;border:1.5px solid var(--rule);background:var(--sand);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;touch-action:manipulation;position:relative;}
+.chk-box{width:26px;height:26px;border-radius:5px;border:1.5px solid var(--rule);background:var(--sand);cursor:pointer;flex-shrink:0;touch-action:manipulation;position:relative;-webkit-appearance:none;}
 .chk-box::after{content:'';display:none;}
 .chk-box.on{background:var(--grl);border-color:var(--gr);}
-.chk-box.on::after{content:'\2713';display:block;font-size:15px;color:var(--gr);line-height:1;}
+.chk-box.on::after{content:'\2713';display:block;position:absolute;top:50%;left:50%;transform:translate(-50%,-52%);font-size:15px;color:var(--gr);line-height:1;}
 .chk-label{font-size:13px;color:var(--ink);}
-/* BM per-entry */
+/* BM entries */
 .bm-list{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
 .bm-entry{background:var(--sand);border:1px solid var(--rule);border-radius:10px;padding:10px 12px;}
+.bm-entry.strain-only{border-color:var(--mu);border-style:dashed;}
 .bm-entry-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
-.bm-entry-num{font-size:12px;font-weight:500;color:var(--mu);}
-.bm-del{background:none;border:none;color:var(--mu);font-size:18px;cursor:pointer;touch-action:manipulation;padding:2px 6px;line-height:1;}
-.bm-add{width:100%;padding:10px;background:none;border:1.5px dashed var(--rule);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--mu);cursor:pointer;touch-action:manipulation;text-align:center;}
+.bm-entry-label{font-size:12px;font-weight:500;color:var(--mu);}
+.bm-del{background:none;border:none;color:var(--mu);font-size:18px;cursor:pointer;touch-action:manipulation;padding:2px 6px;line-height:1;min-width:32px;min-height:32px;}
+.bm-add-row{display:flex;gap:7px;}
+.bm-add{flex:1;padding:10px;background:none;border:1.5px dashed var(--rule);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--mu);cursor:pointer;touch-action:manipulation;text-align:center;min-height:44px;}
+.bm-add-strain{padding:10px 12px;background:none;border:1.5px dashed var(--mu);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--mu);cursor:pointer;touch-action:manipulation;text-align:center;min-height:44px;white-space:nowrap;}
 .bristol-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px;}
-.bristol-btn{padding:6px 8px;border-radius:8px;border:1.5px solid var(--rule);background:none;font-family:'DM Sans',sans-serif;font-size:11px;color:var(--mu);cursor:pointer;touch-action:manipulation;text-align:left;line-height:1.3;}
+.bristol-btn{padding:6px 8px;border-radius:8px;border:1.5px solid var(--rule);background:none;font-family:'DM Sans',sans-serif;font-size:11px;color:var(--mu);cursor:pointer;touch-action:manipulation;text-align:left;line-height:1.3;-webkit-appearance:none;}
 .bristol-btn.on{background:var(--acl);border-color:var(--ac);color:var(--ac);font-weight:500;}
 .bristol-type{font-weight:600;display:block;}
 .bristol-desc{opacity:.8;}
+.bm-time-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.bm-time-lbl{font-size:11px;color:var(--mu);}
+.bm-time-input{padding:6px 10px;border:1.5px solid var(--rule);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;background:var(--sand);color:var(--ink);outline:none;-webkit-appearance:none;min-height:38px;width:110px;}
+.bm-time-input:focus{border-color:var(--ac);}
 /* Stress */
 .stress-opts{display:flex;flex-direction:column;gap:7px;}
-.stress-opt{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;border:1.5px solid var(--rule);background:none;cursor:pointer;touch-action:manipulation;text-align:left;font-family:'DM Sans',sans-serif;width:100%;}
+.stress-opt{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;border:1.5px solid var(--rule);background:none;cursor:pointer;touch-action:manipulation;text-align:left;font-family:'DM Sans',sans-serif;width:100%;-webkit-appearance:none;}
 .stress-opt.on{background:var(--acl);border-color:var(--ac);}
 .stress-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
 .s0 .stress-dot{background:#9FC87A;}
@@ -99,35 +104,43 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
 .ftag{background:var(--tag);padding:5px 11px;border-radius:20px;font-size:12px;display:flex;align-items:center;gap:5px;}
 .ftag button{background:none;border:none;cursor:pointer;color:var(--mu);font-size:16px;padding:0;line-height:1;touch-action:manipulation;min-width:24px;min-height:24px;display:flex;align-items:center;justify-content:center;}
 /* GERD */
-.gerd-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;background:none;border:1.5px solid var(--rule);border-radius:10px;padding:10px 14px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--mu);cursor:pointer;touch-action:manipulation;margin-bottom:10px;}
+.gerd-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;background:none;border:1.5px solid var(--rule);border-radius:10px;padding:10px 14px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--mu);cursor:pointer;touch-action:manipulation;margin-top:8px;-webkit-appearance:none;}
 .gerd-toggle.has-data{border-color:var(--ac);color:var(--ac);}
-.gerd-content{display:none;}
+.gerd-content{display:none;padding-top:8px;}
 .gerd-content.open{display:block;}
-/* Meds grid */
+/* Meds */
 .med-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
-.med-item{display:flex;align-items:center;gap:8px;padding:9px 11px;border-radius:9px;border:1.5px solid var(--rule);background:none;cursor:pointer;touch-action:manipulation;text-align:left;font-family:'DM Sans',sans-serif;width:100%;}
+.med-item{display:flex;align-items:flex-start;gap:8px;padding:9px 11px;border-radius:9px;border:1.5px solid var(--rule);background:none;cursor:pointer;touch-action:manipulation;text-align:left;font-family:'DM Sans',sans-serif;width:100%;-webkit-appearance:none;flex-direction:column;}
 .med-item.on{background:var(--purplel);border-color:var(--purple);}
 .med-name{font-size:13px;color:var(--ink);font-weight:500;display:block;}
 .med-dose{font-size:10px;color:var(--mu);display:block;margin-top:1px;}
+.med-time-wrap{display:none;margin-top:6px;width:100%;}
+.med-item.on .med-time-wrap{display:block;}
+.med-time-input{width:100%;padding:5px 8px;border:1.5px solid var(--purple);border-radius:6px;font-family:'DM Sans',sans-serif;font-size:13px;background:var(--ww);color:var(--ink);outline:none;-webkit-appearance:none;min-height:34px;}
 /* Notes */
 .ni{width:100%;padding:10px 11px;border:1.5px solid var(--rule);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:15px;background:var(--sand);color:var(--ink);resize:vertical;min-height:66px;outline:none;-webkit-appearance:none;line-height:1.5;}
 .ni:focus{border-color:var(--ac);}
 .ni::placeholder{color:var(--mu);}
-/* Sleep inputs */
-.sleep-row{display:flex;gap:10px;margin-bottom:10px;}
+/* Sleep */
+.sleep-row{display:flex;gap:10px;margin-bottom:12px;}
 .sleep-field{flex:1;}
 .sleep-field label{font-size:11px;color:var(--mu);display:block;margin-bottom:5px;}
 .sleep-input{width:100%;padding:9px 11px;border:1.5px solid var(--rule);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:15px;background:var(--sand);color:var(--ink);outline:none;-webkit-appearance:none;min-height:44px;}
 .sleep-input:focus{border-color:var(--blue);}
+.groggy-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.groggy-lbl{font-size:12px;color:var(--mu);width:90px;flex-shrink:0;}
+.groggy-dots{display:flex;gap:5px;}
 /* Weather */
 .wx-pill{display:flex;align-items:center;gap:8px;padding:9px 12px;background:var(--bluel);border-radius:10px;font-size:12px;color:var(--blue);margin-bottom:11px;flex-wrap:wrap;}
 .wx-item{display:flex;align-items:center;gap:4px;}
 .wx-fetch{font-size:11px;color:var(--mu);font-style:italic;}
-/* Migraine end time */
-.end-row{display:flex;align-items:center;gap:10px;margin-top:10px;}
-.end-row label{font-size:12px;color:var(--mu);}
-.end-input{padding:8px 10px;border:1.5px solid var(--rule);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;background:var(--sand);color:var(--ink);outline:none;-webkit-appearance:none;min-height:42px;width:120px;}
-.end-input:focus{border-color:var(--blue);}
+/* Migraine time/end */
+.mg-time-row{margin-bottom:12px;}
+.mg-time-row label{font-size:11px;color:var(--mu);display:block;margin-bottom:5px;}
+.mg-time-input{padding:8px 10px;border:1.5px solid var(--blue);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:15px;background:var(--sand);color:var(--ink);outline:none;-webkit-appearance:none;min-height:44px;width:130px;}
+.mg-time-input:focus{border-color:var(--ink);}
+.end-row{display:flex;align-items:center;gap:10px;margin-top:4px;}
+.end-row label{font-size:11px;color:var(--mu);}
 /* Actions */
 .acts{display:flex;gap:9px;margin-top:4px;}
 .svbtn{flex:1;padding:14px;background:var(--ink);color:var(--ww);border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;touch-action:manipulation;-webkit-appearance:none;min-height:52px;}
@@ -140,7 +153,7 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
 .export-banner{background:var(--grl);border:1px solid var(--gr);border-radius:10px;padding:10px 14px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
 .export-banner span{font-size:13px;color:var(--gr);}
 .export-banner button{background:var(--gr);color:#fff;border:none;border-radius:8px;padding:7px 12px;font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;touch-action:manipulation;white-space:nowrap;}
-/* History */
+/* History panels */
 #hp,#mhp,#slhp{display:none;margin-top:6px;}
 #hp.open,#mhp.open,#slhp.open{display:block;}
 .he{background:var(--ww);border:1px solid var(--rule);border-radius:10px;padding:13px 15px;margin-bottom:9px;}
@@ -176,29 +189,39 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
   <!-- ═══ GI TAB ═══ -->
   <div id="tab-gi">
 
-    <!-- WATER — day level, above TOD -->
+    <!-- WATER — day level -->
     <div class="sec">
       <div class="sl">Water &mdash; today</div>
-      <div class="wr"><div class="dps" id="dps"></div><span id="wc">0 / 8</span></div>
-    </div>
-
-    <!-- MEDS — day level, above TOD -->
-    <div class="sec">
-      <div class="sl purple">Medications today</div>
-      <div class="med-grid">
-        <button class="med-item" data-m="miralax"><div><span class="med-name">MiraLax</span><span class="med-dose">daily</span></div></button>
-        <button class="med-item" data-m="prilosec"><div><span class="med-name">Prilosec</span><span class="med-dose">as needed</span></div></button>
-        <button class="med-item" data-m="zofran"><div><span class="med-name">Zofran</span><span class="med-dose">as needed</span></div></button>
-        <button class="med-item" data-m="fiber"><div><span class="med-name">Fiber</span><span class="med-dose">daily</span></div></button>
-        <button class="med-item" data-m="qulipta"><div><span class="med-name">Qulipta</span><span class="med-dose">daily</span></div></button>
-        <button class="med-item" data-m="wegovy"><div><span class="med-name">Wegovy</span><span class="med-dose">weekly</span></div></button>
+      <div style="display:flex;align-items:center;gap:10px">
+        <input class="water-input" type="number" id="water-oz" min="0" max="300" placeholder="0">
+        <span class="water-unit">oz today</span>
       </div>
     </div>
 
-    <!-- DAY-LEVEL NOTES -->
+    <!-- MEDS — day level -->
+    <div class="sec">
+      <div class="sl purple">Medications today</div>
+      <div class="med-grid">
+        <button class="med-item" data-m="miralax">
+          <span class="med-name">MiraLax</span><span class="med-dose">daily</span>
+        </button>
+        <button class="med-item" data-m="zofran">
+          <span class="med-name">Zofran</span><span class="med-dose">as needed</span>
+          <div class="med-time-wrap"><input class="med-time-input" type="time" data-mt="zofran" placeholder="time taken"></div>
+        </button>
+        <button class="med-item" data-m="fiber">
+          <span class="med-name">Fiber</span><span class="med-dose">daily</span>
+        </button>
+        <button class="med-item" data-m="wegovy">
+          <span class="med-name">Wegovy</span><span class="med-dose">weekly</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- DAY NOTES -->
     <div class="sec">
       <div class="sl">Day notes</div>
-      <textarea class="ni" id="day-notes" placeholder="Overall day context — stress events, cycle, travel, anything not slot-specific..."></textarea>
+      <textarea class="ni" id="day-notes" placeholder="Overall context — stress events, travel, anything not slot-specific..."></textarea>
     </div>
 
     <!-- TOD SELECTOR -->
@@ -211,7 +234,7 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
 
     <!-- SYMPTOMS — slot level -->
     <div class="sec">
-      <div class="sl">Symptoms &mdash; 1 mild to 5 severe</div>
+      <div class="sl">Symptoms &mdash; 1 mild · 5 severe</div>
       <div class="sr"><span class="sn">Hollow / rumbling</span><div class="sd" data-k="hollow"></div></div>
       <div class="dv"></div>
       <div class="sr"><span class="sn">Stomach pain</span><div class="sd" data-k="pain"></div></div>
@@ -223,20 +246,28 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
       <div class="sr"><span class="sn">Nausea</span><div class="sd" data-k="nausea"></div></div>
       <div class="dv"></div>
       <div class="sr"><span class="sn">Energy</span><div class="sd" data-k="energy"></div></div>
-
-      <!-- GERD inside symptoms, collapsed -->
+      <div class="dv"></div>
+      <div style="display:flex;gap:20px;padding-top:2px;">
+        <div class="chk-row" style="margin-bottom:0">
+          <button class="chk-box" id="chk-gagging"></button>
+          <span class="chk-label">Gagging</span>
+        </div>
+        <div class="chk-row" style="margin-bottom:0">
+          <button class="chk-box" id="chk-vomiting"></button>
+          <span class="chk-label">Vomiting</span>
+        </div>
+      </div>
+      <!-- GERD collapsed inside symptoms -->
       <div class="dv" style="margin-top:10px"></div>
-      <button class="gerd-toggle" id="gerd-toggle" style="margin-bottom:0;margin-top:8px;">
+      <button class="gerd-toggle" id="gerd-toggle">
         <span>GERD symptoms</span><span id="gerd-arrow">+</span>
       </button>
       <div class="gerd-content" id="gerd-content">
-        <div style="padding-top:8px">
-          <div class="chips">
-            <button class="chip" data-v="regurg">Regurgitation</button>
-            <button class="chip" data-v="metallic">Metallic taste</button>
-            <button class="chip" data-v="heartburn">Heartburn</button>
-            <button class="chip" data-v="throat">Throat burning</button>
-          </div>
+        <div class="chips">
+          <button class="chip" data-v="regurg">Regurgitation</button>
+          <button class="chip" data-v="metallic">Metallic taste</button>
+          <button class="chip" data-v="heartburn">Heartburn</button>
+          <button class="chip" data-v="throat">Throat burning</button>
         </div>
       </div>
     </div>
@@ -245,7 +276,10 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
     <div class="sec">
       <div class="sl">BMs this slot</div>
       <div class="bm-list" id="bm-list"></div>
-      <button class="bm-add" id="bm-add">+ Log a BM</button>
+      <div class="bm-add-row">
+        <button class="bm-add" id="bm-add">+ Log a BM</button>
+        <button class="bm-add-strain" id="bm-add-strain">+ Straining only</button>
+      </div>
     </div>
 
     <!-- STRESS — slot level -->
@@ -294,24 +328,21 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
 
   <!-- ═══ MIGRAINE TAB ═══ -->
   <div id="tab-migraine" style="display:none">
-
-    <div class="wx-pill" id="wx-pill">
-      <span class="wx-fetch">Fetching weather...</span>
-    </div>
+    <div class="wx-pill" id="wx-pill"><span class="wx-fetch">Fetching weather...</span></div>
 
     <div class="sec">
       <div class="sl blue">Migraine episode</div>
 
-      <div style="margin-bottom:12px">
-        <div style="font-size:11px;color:var(--mu);margin-bottom:5px">Time of onset</div>
-        <input class="sleep-input" type="time" id="m-onset" style="width:130px;border-color:var(--blue)">
+      <div class="mg-time-row">
+        <label>Time of onset</label>
+        <input class="mg-time-input" type="time" id="m-onset">
       </div>
 
       <div style="font-size:11px;color:var(--mu);margin-bottom:6px">Severity</div>
-      <div class="sd" id="msev-dots" style="margin-bottom:12px;gap:5px"></div>
+      <div class="sd" id="msev-dots" style="margin-bottom:14px;gap:5px"></div>
 
       <div style="font-size:11px;color:var(--mu);margin-bottom:6px">Location</div>
-      <div class="chips" id="m-loc" style="margin-bottom:12px">
+      <div class="chips" id="m-loc" style="margin-bottom:14px">
         <button class="chip" data-v="left">Left</button>
         <button class="chip" data-v="right">Right</button>
         <button class="chip" data-v="bilateral">Both sides</button>
@@ -320,7 +351,7 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
       </div>
 
       <div style="font-size:11px;color:var(--mu);margin-bottom:6px">Symptoms</div>
-      <div class="chips" id="m-syms" style="margin-bottom:12px">
+      <div class="chips" id="m-syms" style="margin-bottom:14px">
         <button class="chip" data-v="light">Light sensitivity</button>
         <button class="chip" data-v="sound">Sound sensitivity</button>
         <button class="chip" data-v="vomiting">Vomiting</button>
@@ -329,8 +360,8 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
         <button class="chip" data-v="neck">Neck stiffness</button>
       </div>
 
-      <div style="font-size:11px;color:var(--mu);margin-bottom:6px">Before onset &mdash; mood / prodrome?</div>
-      <div class="chips" id="m-prodrome" style="margin-bottom:12px">
+      <div style="font-size:11px;color:var(--mu);margin-bottom:6px">Before onset &mdash; prodrome?</div>
+      <div class="chips" id="m-prodrome" style="margin-bottom:14px">
         <button class="chip" data-v="irritable">Irritable</button>
         <button class="chip" data-v="moody">Moody / low</button>
         <button class="chip" data-v="foggy">Brain fog</button>
@@ -340,7 +371,7 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
       </div>
 
       <div style="font-size:11px;color:var(--mu);margin-bottom:6px">Stress at onset</div>
-      <div class="stress-opts" id="mg-stress-opts" style="margin-bottom:12px">
+      <div class="stress-opts" id="mg-stress-opts" style="margin-bottom:14px">
         <button class="stress-opt s0" data-sv="0">
           <div class="stress-dot"></div>
           <div><div class="stress-title">Normal</div><div class="stress-desc">Breathing easy. Thoughts feel manageable.</div></div>
@@ -361,17 +392,17 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
         <button class="chip" data-v="rizatriptan">Rizatriptan</button>
         <button class="chip" data-v="advil">Advil</button>
       </div>
-      <div class="chk-row" style="margin-bottom:12px">
+      <div class="chk-row" style="margin-bottom:14px">
         <button class="chk-box" id="chk-medworks"></button>
         <span class="chk-label" style="font-size:12px">Medication helped</span>
       </div>
 
-      <div class="end-row">
-        <label>End time (optional)</label>
-        <input class="end-input" type="time" id="m-end">
+      <div class="end-row" style="margin-bottom:12px">
+        <label>End time</label>
+        <input class="mg-time-input" type="time" id="m-end">
       </div>
 
-      <div style="margin-top:11px">
+      <div>
         <label style="font-size:11px;color:var(--mu);display:block;margin-bottom:5px">Numbness notes</label>
         <textarea class="ni" id="m-numbness" placeholder="e.g. left eye area, spread to lip..." style="min-height:54px"></textarea>
       </div>
@@ -388,33 +419,37 @@ header h1{font-family:'DM Serif Display',serif;font-size:21px;font-weight:400;}
       <button class="hbtn" id="mhtog">History</button>
     </div>
     <div id="mhp"></div>
-
   </div><!-- /tab-migraine -->
 
   <!-- ═══ SLEEP TAB ═══ -->
   <div id="tab-sleep" style="display:none">
     <div class="sec">
-      <div class="sl blue">Sleep &mdash; <span id="sleep-date-lbl">tonight</span></div>
+      <div class="sl blue">Sleep &mdash; <span id="sleep-date-lbl"></span></div>
 
       <div class="sleep-row">
         <div class="sleep-field">
-          <label>Bed time</label>
-          <input class="sleep-input" type="time" id="sl-bed">
+          <label>Woke up this morning</label>
+          <input class="sleep-input" type="time" id="sl-wake">
         </div>
         <div class="sleep-field">
-          <label>Wake time</label>
-          <input class="sleep-input" type="time" id="sl-wake">
+          <label>Going to bed tonight</label>
+          <input class="sleep-input" type="time" id="sl-bed">
         </div>
       </div>
 
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-        <span style="font-size:12px;color:var(--mu);width:90px;flex-shrink:0">Groggy on waking</span>
-        <div class="sd" id="groggy-dots" style="gap:5px"></div>
+      <div class="groggy-row">
+        <span class="groggy-lbl">Groggy on waking</span>
+        <div class="groggy-dots" id="groggy-dots"></div>
       </div>
 
       <div class="chk-row">
         <button class="chk-box" id="chk-nightmare"></button>
         <span class="chk-label">Nightmare</span>
+      </div>
+      <div class="dv"></div>
+      <div class="chk-row">
+        <button class="chk-box" id="chk-vivid"></button>
+        <span class="chk-label">Vivid dream</span>
       </div>
       <div class="dv"></div>
       <div class="chk-row">
@@ -441,14 +476,13 @@ var LAT=38.9359, LNG=-77.3537;
 var nd=new Date(), td=new Date(), curTod='morning';
 nd.setHours(0,0,0,0); td.setHours(0,0,0,0);
 
-// Bristol Stool Scale
 var BRISTOL=[
   {t:'Type 1',d:'Separate hard lumps'},
-  {t:'Type 2',d:'Lumpy sausage shape'},
-  {t:'Type 3',d:'Sausage, cracked surface'},
-  {t:'Type 4',d:'Smooth, soft sausage'},
-  {t:'Type 5',d:'Soft blobs, clear edges'},
-  {t:'Type 6',d:'Fluffy, mushy pieces'},
+  {t:'Type 2',d:'Lumpy sausage'},
+  {t:'Type 3',d:'Sausage, cracked'},
+  {t:'Type 4',d:'Smooth sausage'},
+  {t:'Type 5',d:'Soft blobs'},
+  {t:'Type 6',d:'Fluffy, mushy'},
   {t:'Type 7',d:'Entirely liquid'}
 ];
 
@@ -459,30 +493,33 @@ var FL={morning:'Breakfast',midday:'Lunch & snacks',evening:'Dinner'};
 var SLB=['Normal','Getting there','Abject panic'];
 
 // State factories
-function mkDay(){return {water:0,meds:[],dayNotes:''};}
-function mkSlot(){return {sym:{hollow:0,pain:0,bloat:0,ache:0,nausea:0,energy:0},bms:[],stress:-1,gerd:[],foods:[],slotNotes:''};}
+function mkDay(){return {waterOz:0,meds:[],medTimes:{},dayNotes:''};}
+function mkSlot(){return {sym:{hollow:0,pain:0,bloat:0,ache:0,nausea:0,energy:0},gagging:false,vomiting:false,bms:[],stress:-1,gerd:[],foods:[],slotNotes:''};}
 function mkMG(){return {onset:'',end:'',sev:0,loc:null,syms:[],prodrome:[],stress:-1,meds:[],medworks:false,numbness:'',notes:'',weather:null};}
-function mkSL(){return {bed:'',wake:'',groggy:0,nightmare:false,waking:false};}
-function mkBM(){return {type:null,urgent:false,strain:false};}
+function mkSL(){return {wake:'',bed:'',groggy:0,nightmare:false,vivid:false,waking:false};}
+function mkBM(strainOnly){return {time:'',type:strainOnly?-1:null,urgent:false,strain:true,strainOnly:!!strainOnly};}
 
 var day=mkDay(), slot=mkSlot(), mg=mkMG(), sl=mkSL();
 
 // Storage
 function dk(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
-function dayK(d){return 'gl6-day-'+dk(d);}
-function slotK(d,t){return 'gl6-slot-'+dk(d)+'-'+t;}
-function mgK(d){return 'gl6-mg-'+dk(d);}
-function slK(d){return 'gl6-sl-'+dk(d);}
+function dayK(d){return 'gl7-day-'+dk(d);}
+function slotK(d,t){return 'gl7-slot-'+dk(d)+'-'+t;}
+function mgK(d){return 'gl7-mg-'+dk(d);}
+function slK(d){return 'gl7-sl-'+dk(d);}
 function lg(k){try{var v=localStorage.getItem(k);return v?JSON.parse(v):null;}catch(e){return null;}}
 function lset(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
 
-// Tap — fires once regardless of touch/click
+// Tap — touch fires fn and sets flag to block the ghost click iOS fires after
 function tap(el,fn){
-  var mv=false;
-  el.addEventListener('touchstart',function(){mv=false;},{passive:true});
-  el.addEventListener('touchmove',function(){mv=true;},{passive:true});
-  el.addEventListener('touchend',function(e){if(!mv){e.preventDefault();e.stopPropagation();fn();}});
-  el.addEventListener('click',function(e){if(!e._tapped)fn();});
+  var touched=false,moved=false;
+  el.addEventListener('touchstart',function(){moved=false;touched=false;},{passive:true});
+  el.addEventListener('touchmove',function(){moved=true;},{passive:true});
+  el.addEventListener('touchend',function(e){
+    if(!moved){e.preventDefault();e.stopPropagation();touched=true;fn();
+      setTimeout(function(){touched=false;},400);}
+  });
+  el.addEventListener('click',function(){if(!touched)fn();});
 }
 
 function setChk(id,val){
@@ -495,11 +532,14 @@ var wxCache={};
 function fetchWeather(cb){
   var key=dk(nd);
   if(wxCache[key]){cb(wxCache[key]);return;}
-  fetch('https://api.open-meteo.com/v1/forecast?latitude='+LAT+'&longitude='+LNG+'&current=temperature_2m,relative_humidity_2m,precipitation,surface_pressure&temperature_unit=fahrenheit&timezone=America%2FNew_York')
+  fetch('https://api.open-meteo.com/v1/forecast?latitude='+LAT+'&longitude='+LNG
+    +'&current=temperature_2m,relative_humidity_2m,precipitation,surface_pressure'
+    +'&temperature_unit=fahrenheit&timezone=America%2FNew_York')
     .then(function(r){return r.json();})
     .then(function(d){
       if(d&&d.current){
-        var w={temp:Math.round(d.current.temperature_2m),humidity:d.current.relative_humidity_2m,precip:d.current.precipitation,pressure:Math.round(d.current.surface_pressure)};
+        var w={temp:Math.round(d.current.temperature_2m),humidity:d.current.relative_humidity_2m,
+               precip:d.current.precipitation,pressure:Math.round(d.current.surface_pressure)};
         wxCache[key]=w;cb(w);
       }else cb(null);
     }).catch(function(){cb(null);});
@@ -523,37 +563,42 @@ function renderWeather(){
   }
 }
 
-// Dots renderer (generic)
-function makeDots(containerId,getVal,setVal,rerender){
-  var row=document.getElementById(containerId);if(!row)return;
-  row.innerHTML='';
+// Generic scale dots — uses direct addEventListener to avoid listener accumulation
+function makeDots(container,getVal,setVal,rerender){
+  if(!container)return;
+  container.innerHTML='';
   for(var i=1;i<=5;i++){(function(n){
-    var d=document.createElement('div');
+    var d=document.createElement('button');
     d.className='dot'+(getVal()===n?' a'+n:'');
     d.textContent=n;
-    tap(d,function(){setVal(getVal()===n?0:n);rerender();});
-    row.appendChild(d);
+    d.setAttribute('type','button');
+    var fired=false;
+    d.addEventListener('touchend',function(e){
+      e.preventDefault();e.stopPropagation();
+      fired=true;setVal(getVal()===n?0:n);rerender();
+      setTimeout(function(){fired=false;},400);
+    });
+    d.addEventListener('click',function(){if(!fired){setVal(getVal()===n?0:n);rerender();}});
+    container.appendChild(d);
   })(i);}
 }
 
 // ── Render water ──
 function rW(){
-  var c=document.getElementById('dps');if(!c)return;
-  c.innerHTML='';
-  for(var i=1;i<=8;i++){(function(n){
-    var d=document.createElement('div');
-    d.className='drop'+(n<=day.water?' on':'');
-    tap(d,function(){day.water=(day.water===n)?n-1:n;lset(dayK(nd),day);rW();});
-    c.appendChild(d);
-  })(i);}
-  document.getElementById('wc').textContent=day.water+' / 8';
+  var inp=document.getElementById('water-oz');
+  if(inp&&document.activeElement!==inp) inp.value=day.waterOz||'';
 }
 
 // ── Render meds ──
 function rMeds(){
   document.querySelectorAll('.med-item').forEach(function(b){
-    b.className='med-item'+(day.meds.indexOf(b.dataset.m)>=0?' on':'');
+    var m=b.dataset.m;
+    var on=day.meds.indexOf(m)>=0;
+    b.classList.toggle('on',on);
   });
+  // Restore Zofran time if saved
+  var zt=document.querySelector('.med-time-input[data-mt="zofran"]');
+  if(zt&&document.activeElement!==zt) zt.value=day.medTimes.zofran||'';
 }
 
 // ── Render symptoms ──
@@ -562,56 +607,86 @@ function rSym(){
     var row=document.querySelector('#tab-gi .sd[data-k="'+k+'"]');if(!row)return;
     row.innerHTML='';
     for(var i=1;i<=5;i++){(function(n){
-      var d=document.createElement('div');
+      var d=document.createElement('button');
+      d.setAttribute('type','button');
       d.className='dot'+(slot.sym[k]===n?' a'+n:'');
       d.textContent=n;
-      tap(d,function(){slot.sym[k]=(slot.sym[k]===n)?0:n;rSym();});
+      var fired=false;
+      d.addEventListener('touchend',function(e){
+        e.preventDefault();e.stopPropagation();
+        fired=true;slot.sym[k]=(slot.sym[k]===n)?0:n;rSym();
+        setTimeout(function(){fired=false;},400);
+      });
+      d.addEventListener('click',function(){if(!fired){slot.sym[k]=(slot.sym[k]===n)?0:n;rSym();}});
       row.appendChild(d);
     })(i);}
   });
+  setChk('chk-gagging',slot.gagging);
+  setChk('chk-vomiting',slot.vomiting);
 }
 
 // ── Render BMs ──
 function rBMs(){
   var list=document.getElementById('bm-list');if(!list)return;
   list.innerHTML='';
-  slot.bms.forEach(function(bm,i){
-    var entry=document.createElement('div');entry.className='bm-entry';
+  slot.bms.forEach(function(bm,idx){
+    var entry=document.createElement('div');
+    entry.className='bm-entry'+(bm.strainOnly?' strain-only':'');
 
+    // Header
     var head=document.createElement('div');head.className='bm-entry-head';
-    var num=document.createElement('span');num.className='bm-entry-num';num.textContent='BM '+(i+1);
+    var lbl=document.createElement('span');lbl.className='bm-entry-label';
+    lbl.textContent=bm.strainOnly?'Straining — no output':'BM '+(idx+1);
     var del=document.createElement('button');del.className='bm-del';del.textContent='\u00D7';
-    tap(del,function(){slot.bms.splice(i,1);rBMs();});
-    head.appendChild(num);head.appendChild(del);
+    del.setAttribute('type','button');
+    tap(del,function(){slot.bms.splice(idx,1);rBMs();});
+    head.appendChild(lbl);head.appendChild(del);
     entry.appendChild(head);
 
-    // Bristol grid
-    var grid=document.createElement('div');grid.className='bristol-grid';
-    BRISTOL.forEach(function(b,bi){
-      var btn=document.createElement('button');btn.className='bristol-btn'+(bm.type===bi?' on':'');
-      btn.innerHTML='<span class="bristol-type">'+b.t+'</span><span class="bristol-desc">'+b.d+'</span>';
-      tap(btn,function(){bm.type=(bm.type===bi)?null:bi;rBMs();});
-      grid.appendChild(btn);
-    });
-    entry.appendChild(grid);
+    // Time
+    var timeRow=document.createElement('div');timeRow.className='bm-time-row';
+    var timeLbl=document.createElement('span');timeLbl.className='bm-time-lbl';timeLbl.textContent='Time:';
+    var timeInp=document.createElement('input');timeInp.type='time';timeInp.className='bm-time-input';
+    timeInp.value=bm.time||'';
+    timeInp.addEventListener('change',function(){bm.time=this.value;});
+    timeInp.addEventListener('input',function(){bm.time=this.value;});
+    timeRow.appendChild(timeLbl);timeRow.appendChild(timeInp);
+    entry.appendChild(timeRow);
 
-    // Urgency + straining
-    var chkRow=document.createElement('div');chkRow.style.cssText='display:flex;gap:16px;margin-top:4px;';
+    // Bristol (only for actual BMs)
+    if(!bm.strainOnly){
+      var grid=document.createElement('div');grid.className='bristol-grid';
+      BRISTOL.forEach(function(b,bi){
+        var btn=document.createElement('button');
+        btn.setAttribute('type','button');
+        btn.className='bristol-btn'+(bm.type===bi?' on':'');
+        btn.innerHTML='<span class="bristol-type">'+b.t+'</span><span class="bristol-desc">'+b.d+'</span>';
+        tap(btn,function(){bm.type=(bm.type===bi)?null:bi;rBMs();});
+        grid.appendChild(btn);
+      });
+      entry.appendChild(grid);
+    }
 
-    var urgRow=document.createElement('div');urgRow.className='chk-row';urgRow.style.marginBottom='0';
-    var urgBox=document.createElement('button');urgBox.className='chk-box'+(bm.urgent?' on':'');
-    tap(urgBox,function(){bm.urgent=!bm.urgent;urgBox.classList.toggle('on',bm.urgent);});
-    var urgLbl=document.createElement('span');urgLbl.className='chk-label';urgLbl.textContent='Urgent';
-    urgRow.appendChild(urgBox);urgRow.appendChild(urgLbl);
-
+    // Urgency + straining checkboxes
+    var chkWrap=document.createElement('div');chkWrap.style.cssText='display:flex;gap:20px;margin-top:6px;';
+    if(!bm.strainOnly){
+      var urgRow=document.createElement('div');urgRow.className='chk-row';urgRow.style.marginBottom='0';
+      var urgBox=document.createElement('button');urgBox.className='chk-box'+(bm.urgent?' on':'');
+      urgBox.setAttribute('type','button');
+      tap(urgBox,function(){bm.urgent=!bm.urgent;urgBox.classList.toggle('on',bm.urgent);});
+      var urgLbl=document.createElement('span');urgLbl.className='chk-label';urgLbl.textContent='Urgent';
+      urgRow.appendChild(urgBox);urgRow.appendChild(urgLbl);
+      chkWrap.appendChild(urgRow);
+    }
     var strRow=document.createElement('div');strRow.className='chk-row';strRow.style.marginBottom='0';
     var strBox=document.createElement('button');strBox.className='chk-box'+(bm.strain?' on':'');
+    strBox.setAttribute('type','button');
     tap(strBox,function(){bm.strain=!bm.strain;strBox.classList.toggle('on',bm.strain);});
     var strLbl=document.createElement('span');strLbl.className='chk-label';strLbl.textContent='Straining';
     strRow.appendChild(strBox);strRow.appendChild(strLbl);
+    chkWrap.appendChild(strRow);
+    entry.appendChild(chkWrap);
 
-    chkRow.appendChild(urgRow);chkRow.appendChild(strRow);
-    entry.appendChild(chkRow);
     list.appendChild(entry);
   });
 }
@@ -639,13 +714,13 @@ function rFood(){
   slot.foods.forEach(function(f,i){
     var tag=document.createElement('div');tag.className='ftag';
     var sp=document.createElement('span');sp.textContent=f;
-    var btn=document.createElement('button');btn.innerHTML='&times;';
+    var btn=document.createElement('button');btn.innerHTML='&times;';btn.setAttribute('type','button');
     tap(btn,function(){slot.foods.splice(i,1);rFood();});
     tag.appendChild(sp);tag.appendChild(btn);c.appendChild(tag);
   });
 }
 
-// ── Render save badges ──
+// ── Render badges ──
 function rBadge(){
   var c=document.getElementById('bdg');if(!c)return;
   c.innerHTML='';
@@ -656,7 +731,7 @@ function rBadge(){
   });
 }
 
-// ── Render all GI slot ──
+// ── Render all GI ──
 function rAllGI(){
   rW();rMeds();rSym();rBMs();rStress();rGERD();rFood();rBadge();
   var fl=document.getElementById('flbl');if(fl)fl.textContent=FL[curTod]||'Food';
@@ -669,7 +744,7 @@ function rAllGI(){
 function rMig(){
   var ons=document.getElementById('m-onset');if(ons&&document.activeElement!==ons)ons.value=mg.onset||'';
   var end=document.getElementById('m-end');if(end&&document.activeElement!==end)end.value=mg.end||'';
-  makeDots('msev-dots',function(){return mg.sev;},function(v){mg.sev=v;},rMig);
+  makeDots(document.getElementById('msev-dots'),function(){return mg.sev;},function(v){mg.sev=v;},rMig);
   document.querySelectorAll('#m-loc .chip').forEach(function(c){c.className='chip'+(c.dataset.v===mg.loc?' on-b':'');});
   document.querySelectorAll('#m-syms .chip').forEach(function(c){c.className='chip'+(mg.syms.indexOf(c.dataset.v)>=0?' on-b':'');});
   document.querySelectorAll('#m-prodrome .chip').forEach(function(c){c.className='chip'+(mg.prodrome.indexOf(c.dataset.v)>=0?' on-b':'');});
@@ -683,16 +758,25 @@ function rMig(){
 
 // ── Render sleep ──
 function rSleep(){
-  var bed=document.getElementById('sl-bed');if(bed&&document.activeElement!==bed)bed.value=sl.bed||'';
+  // Read from state only if not actively editing
   var wake=document.getElementById('sl-wake');if(wake&&document.activeElement!==wake)wake.value=sl.wake||'';
-  makeDots('groggy-dots',function(){return sl.groggy;},function(v){sl.groggy=v;},rSleep);
+  var bed=document.getElementById('sl-bed');if(bed&&document.activeElement!==bed)bed.value=sl.bed||'';
+  // Groggy dots — no re-render of time fields
+  makeDots(document.getElementById('groggy-dots'),
+    function(){return sl.groggy;},
+    function(v){sl.groggy=v;},
+    function(){
+      // Update dots only, don't call full rSleep to avoid clearing active inputs
+      makeDots(document.getElementById('groggy-dots'),function(){return sl.groggy;},function(v){sl.groggy=v;},arguments.callee);
+    }
+  );
   setChk('chk-nightmare',sl.nightmare);
+  setChk('chk-vivid',sl.vivid);
   setChk('chk-waking',sl.waking);
-  // Sleep date label: today's date = tonight's sleep
   var lbl=document.getElementById('sleep-date-lbl');
   if(lbl){
     var diff=Math.round((td-nd)/86400000);
-    lbl.textContent=diff===0?'tonight':diff===1?'last night ('+nfmt()+')':'night of '+nfmt();
+    lbl.textContent=diff===0?'today':diff===1?'yesterday':nd.toLocaleDateString('en-US',{month:'short',day:'numeric'});
   }
 }
 
@@ -704,26 +788,25 @@ function nfmt(){
 }
 function updateNav(){
   document.getElementById('nlbl').textContent=nfmt();
-  var nb=document.getElementById('next');
-  var dis=nd>=td;nb.style.opacity=dis?'0.3':'1';nb.style.pointerEvents=dis?'none':'auto';
+  var nb=document.getElementById('next');var dis=nd>=td;
+  nb.style.opacity=dis?'0.3':'1';nb.style.pointerEvents=dis?'none':'auto';
 }
 
 // ── Load ──
 function loadDay(){
-  var saved=lg(dayK(nd));
   day=mkDay();
-  if(saved){day.water=saved.water||0;day.meds=saved.meds||[];day.dayNotes=saved.dayNotes||'';}
+  var saved=lg(dayK(nd));
+  if(saved){day.waterOz=saved.waterOz||0;day.meds=saved.meds||[];day.medTimes=saved.medTimes||{};day.dayNotes=saved.dayNotes||'';}
 }
 function loadSlot(){
   slot=mkSlot();
   var saved=lg(slotK(nd,curTod));
   if(saved){
     if(saved.sym)Object.assign(slot.sym,saved.sym);
+    slot.gagging=!!saved.gagging;slot.vomiting=!!saved.vomiting;
     slot.bms=saved.bms||[];
     slot.stress=saved.stress!==undefined?saved.stress:-1;
-    slot.gerd=saved.gerd||[];
-    slot.foods=saved.foods||[];
-    slot.slotNotes=saved.slotNotes||'';
+    slot.gerd=saved.gerd||[];slot.foods=saved.foods||[];slot.slotNotes=saved.slotNotes||'';
   }
 }
 function loadMG(){mg=mkMG();var e=lg(mgK(nd));if(e)Object.assign(mg,e);}
@@ -743,36 +826,27 @@ function toast(m){var t=document.getElementById('toast');t.textContent=m;t.class
 
 function checkFridayBanner(){
   if(new Date().getDay()===5){
-    var key='gl6-fri-'+dk(new Date());
-    if(!lg(key))document.getElementById('export-banner').style.display='flex';
+    if(!lg('gl7-fri-'+dk(new Date())))document.getElementById('export-banner').style.display='flex';
   }
 }
 
 // ── CSV ──
 function exportCSV(){
-  // Headers
-  var hdr=['Date','Slot','Water','Meds','Day_Notes',
-    'Hollow','Pain','Bloat','Aches','Nausea','Energy','Stress',
-    'GERD','BM_Count',
-    'BM1_Bristol','BM1_Urgent','BM1_Strain',
-    'BM2_Bristol','BM2_Urgent','BM2_Strain',
-    'BM3_Bristol','BM3_Urgent','BM3_Strain',
-    'Foods','Slot_Notes',
+  var hdr=['Date','Slot','Water_oz','Meds','Zofran_Time','Day_Notes',
+    'Hollow','Pain','Bloat','Aches','Nausea','Energy','Gagging','Vomiting','Stress',
+    'GERD','BMs','Slot_Foods','Slot_Notes',
     'Migraine_Onset','Migraine_End','Migraine_Sev','Migraine_Loc',
     'Migraine_Syms','Migraine_Prodrome','Migraine_Stress',
     'Migraine_Meds','Migraine_Med_Helped','Migraine_Numbness','Migraine_Notes',
     'Wx_Temp_F','Wx_Humidity','Wx_Pressure_hPa','Wx_Precip_in',
-    'Sleep_Bed','Sleep_Wake','Sleep_Groggy','Nightmare','Mid_Night_Waking'];
-
+    'Sleep_Wake','Sleep_Bed','Sleep_Groggy','Nightmare','Vivid_Dream','Mid_Night_Waking'];
   var rows=[hdr];
   var days={};
   try{
     for(var i=0;i<localStorage.length;i++){
-      var k=localStorage.key(i);if(!k||!k.startsWith('gl6-'))continue;
-      var pts=k.replace('gl6-','').split('-');
-      var type=pts[0];
-      // date is always pts[1]-pts[2]-pts[3]
-      var ds=pts[1]+'-'+pts[2]+'-'+pts[3];
+      var k=localStorage.key(i);if(!k||!k.startsWith('gl7-'))continue;
+      var pts=k.replace('gl7-','').split('-');
+      var type=pts[0];var ds=pts[1]+'-'+pts[2]+'-'+pts[3];
       if(!days[ds])days[ds]={};
       if(type==='day')days[ds].day=lg(k);
       else if(type==='slot'){if(!days[ds].slots)days[ds].slots={};days[ds].slots[pts[4]]=lg(k);}
@@ -781,60 +855,53 @@ function exportCSV(){
     }
   }catch(ex){}
 
-  function bmCols(bm){
-    if(!bm)return ['','',''];
-    var bristol=bm.type!=null?'Type '+(bm.type+1)+': '+BRISTOL[bm.type].d:'';
-    return[bristol,bm.urgent?'yes':'',bm.strain?'yes':''];
+  // Serialize BMs: T4@14:30|T1@09:00(urgent,strain)|strain-only@10:00
+  function serBMs(bms){
+    if(!bms||!bms.length)return'';
+    return bms.map(function(b){
+      if(b.strainOnly)return'strain-only'+(b.time?'@'+b.time:'');
+      var s=b.type!=null?'T'+(b.type+1):'?';
+      if(b.time)s+='@'+b.time;
+      var flags=[];if(b.urgent)flags.push('urgent');if(b.strain)flags.push('strain');
+      if(flags.length)s+='('+flags.join(',')+')';
+      return s;
+    }).join('|');
   }
 
   Object.keys(days).sort().forEach(function(ds){
-    var d=days[ds];
-    var dv=d.day||{};
-    var mgv=d.mg||{};var slv=d.sl||{};var wx=mgv.weather||{};
+    var d=days[ds];var dv=d.day||{};var mgv=d.mg||{};var slv=d.sl||{};var wx=mgv.weather||{};
     var mgDone=false;
-    ['morning','midday','evening'].forEach(function(slot_t){
-      var sv=d.slots&&d.slots[slot_t];
+    ['morning','midday','evening'].forEach(function(st){
+      var sv=d.slots&&d.slots[st];
       if(!sv&&mgDone)return;
-      var bms=sv?sv.bms||[]:[];
-      var b1=bmCols(bms[0]),b2=bmCols(bms[1]),b3=bmCols(bms[2]);
       var row=[
-        ds, slot_t,
-        dv.water||0,
+        ds,st,dv.waterOz||0,
         (dv.meds||[]).join('|'),
+        dv.medTimes&&dv.medTimes.zofran||'',
         dv.dayNotes||'',
-        sv&&sv.sym?sv.sym.hollow:'',
-        sv&&sv.sym?sv.sym.pain:'',
-        sv&&sv.sym?sv.sym.bloat:'',
-        sv&&sv.sym?sv.sym.ache:'',
-        sv&&sv.sym?sv.sym.nausea:'',
-        sv&&sv.sym?sv.sym.energy:'',
+        sv&&sv.sym?sv.sym.hollow:'',sv&&sv.sym?sv.sym.pain:'',
+        sv&&sv.sym?sv.sym.bloat:'',sv&&sv.sym?sv.sym.ache:'',
+        sv&&sv.sym?sv.sym.nausea:'',sv&&sv.sym?sv.sym.energy:'',
+        sv&&sv.gagging?'yes':'',sv&&sv.vomiting?'yes':'',
         sv&&sv.stress>=0?SLB[sv.stress]:'',
         sv?(sv.gerd||[]).join('|'):'',
-        bms.length
-      ].concat(b1).concat(b2).concat(b3).concat([
+        sv?serBMs(sv.bms):'',
         sv?(sv.foods||[]).join('|'):'',
         sv?sv.slotNotes||'':'',
-        !mgDone?mgv.onset||'':'',
-        !mgDone?mgv.end||'':'',
-        !mgDone?mgv.sev||'':'',
-        !mgDone?mgv.loc||'':'',
-        !mgDone?(mgv.syms||[]).join('|'):'',
-        !mgDone?(mgv.prodrome||[]).join('|'):'',
+        !mgDone?mgv.onset||'':'',!mgDone?mgv.end||'':'',
+        !mgDone?mgv.sev||'':'',!mgDone?mgv.loc||'':'',
+        !mgDone?(mgv.syms||[]).join('|'):'',!mgDone?(mgv.prodrome||[]).join('|'):'',
         !mgDone&&mgv.stress>=0?SLB[mgv.stress]:'',
         !mgDone?(mgv.meds||[]).join('|'):'',
         !mgDone?mgv.medworks?'yes':'':'',
-        !mgDone?mgv.numbness||'':'',
-        !mgDone?mgv.notes||'':'',
-        !mgDone?wx.temp||'':'',
-        !mgDone?wx.humidity||'':'',
-        !mgDone?wx.pressure||'':'',
-        !mgDone?wx.precip||'':'',
-        slv.bed||'',slv.wake||'',slv.groggy||'',
-        slv.nightmare?'yes':'',slv.waking?'yes':''
-      ]);
+        !mgDone?mgv.numbness||'':'',!mgDone?mgv.notes||'':'',
+        !mgDone?wx.temp||'':'',!mgDone?wx.humidity||'':'',
+        !mgDone?wx.pressure||'':'',!mgDone?wx.precip||'':'',
+        slv.wake||'',slv.bed||'',slv.groggy||'',
+        slv.nightmare?'yes':'',slv.vivid?'yes':'',slv.waking?'yes':''
+      ];
       row=row.map(function(v){var s=String(v);return(s.indexOf(',')>=0||s.indexOf('"')>=0)?'"'+s.replace(/"/g,'""')+'"':s;});
-      rows.push(row);
-      mgDone=true;
+      rows.push(row);mgDone=true;
     });
   });
 
@@ -844,7 +911,7 @@ function exportCSV(){
   var a=document.createElement('a');a.href=url;a.download='gut-log-'+dk(new Date())+'.csv';
   document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
   toast('CSV downloaded');
-  lset('gl6-fri-'+dk(new Date()),true);
+  lset('gl7-fri-'+dk(new Date()),true);
   document.getElementById('export-banner').style.display='none';
 }
 
@@ -853,8 +920,8 @@ function loadAllDays(){
   var days={};
   try{
     for(var i=0;i<localStorage.length;i++){
-      var k=localStorage.key(i);if(!k||!k.startsWith('gl6-'))continue;
-      var pts=k.replace('gl6-','').split('-');
+      var k=localStorage.key(i);if(!k||!k.startsWith('gl7-'))continue;
+      var pts=k.replace('gl7-','').split('-');
       var type=pts[0];var ds=pts[1]+'-'+pts[2]+'-'+pts[3];
       if(!days[ds])days[ds]={};
       if(type==='day')days[ds].day=lg(k);
@@ -878,28 +945,32 @@ function rHist(panelId,filter){
     var dv=d.day||{};
     var hasMig=d.mg&&(d.mg.onset||d.mg.sev);
     var migFlag=hasMig?'<span class="migraine-flag">migraine</span>':'';
-    var ws=dv.water?'&#128167;'+dv.water+'/8  ':'';
+    var ws=dv.waterOz?dv.waterOz+'oz  ':'';
 
     var gi_html='';
     if(!filter||filter==='gi'){
-      gi_html=(dv.dayNotes?'<div class="hl" style="color:var(--mu);font-size:11px;margin-bottom:4px">'+dv.dayNotes+'</div>':'');
-      gi_html+=dv.meds&&dv.meds.length?'<div class="hl" style="font-size:11px;margin-bottom:4px">Meds: '+dv.meds.join(', ')+'</div>':'';
-      gi_html+=['morning','midday','evening'].filter(function(t){return d.slots&&d.slots[t];}).map(function(t){
+      if(dv.dayNotes)gi_html+='<div class="hl" style="color:var(--mu);font-size:11px;font-style:italic;margin-bottom:4px">'+dv.dayNotes+'</div>';
+      if(dv.meds&&dv.meds.length)gi_html+='<div class="hl" style="font-size:11px;margin-bottom:4px">Meds: '+dv.meds.join(', ')+(dv.medTimes&&dv.medTimes.zofran?' (Zofran @'+dv.medTimes.zofran+')':'')+'</div>';
+      gi_html+=(['morning','midday','evening'].filter(function(t){return d.slots&&d.slots[t];}).map(function(t){
         var e=d.slots[t];
         var sy=KS.filter(function(k2){return e.sym&&e.sym[k2]>0;}).map(function(k2){return KL[k2]+' '+e.sym[k2];}).join(', ');
-        var bmStr=(e.bms||[]).map(function(b,i){
-          var btype=b.type!=null?'T'+(b.type+1):'?';
-          return btype+(b.urgent?'+urgent':'')+(b.strain?'+strain':'');
-        }).join(', ');
-        return '<div class="ht">'+TL[t]+'</div><div class="hl">'
+        var extras=[e.gagging?'gagging':'',e.vomiting?'vomiting':''].filter(Boolean).join(', ');
+        var bmStr=(e.bms||[]).map(function(b){
+          if(b.strainOnly)return'strain-only'+(b.time?' @'+b.time:'');
+          var s=b.type!=null?'T'+(b.type+1):'?';
+          if(b.time)s+=' @'+b.time;
+          if(b.urgent||b.strain)s+='('+(b.urgent?'urgent':'')+(b.urgent&&b.strain?',':'')+(b.strain?'strain':'')+')';
+          return s;
+        }).join(' | ');
+        return'<div class="ht">'+TL[t]+'</div><div class="hl">'
           +(bmStr?'BM: '+bmStr+'<br>':'')
           +(sy?sy+'<br>':'')
+          +(extras?extras+'<br>':'')
           +(e.stress>=0?'Stress: '+SLB[e.stress]+'<br>':'')
           +(e.gerd&&e.gerd.length?'GERD: '+e.gerd.join(', ')+'<br>':'')
-          +(e.foods&&e.foods.length?'<span style="color:var(--mu);font-size:11px">'+e.foods.join(', ')+'</span><br>':'')
-          +(e.slotNotes?'<span style="color:var(--mu);font-size:11px;font-style:italic">'+e.slotNotes+'</span>':'')
+          +(e.foods&&e.foods.length?'<span style="color:var(--mu);font-size:11px">'+e.foods.join(', ')+'</span>':'')
           +'</div>';
-      }).join('');
+      }).join(''));
     }
 
     var mg_html='';
@@ -913,7 +984,7 @@ function rHist(panelId,filter){
         +(m.stress>=0?'Stress: '+SLB[m.stress]+'<br>':'')
         +(m.meds&&m.meds.length?'Meds: '+m.meds.join(', ')+(m.medworks?' (helped)':'')+'<br>':'')
         +(m.numbness?'Numbness: '+m.numbness+'<br>':'')
-        +(m.weather?m.weather.temp+'F '+m.weather.humidity+'% RH '+m.weather.pressure+'hPa<br>':'')
+        +(m.weather?m.weather.temp+'F  '+m.weather.humidity+'% RH  '+m.weather.pressure+'hPa<br>':'')
         +(m.notes?'<span style="color:var(--mu);font-size:11px">'+m.notes+'</span>':'')
         +'</div>';
     }
@@ -921,12 +992,11 @@ function rHist(panelId,filter){
     var sl_html='';
     if(!filter||filter==='sleep'){
       var sv=d.sl;
-      if(sv&&(sv.bed||sv.wake||sv.groggy)){
+      if(sv&&(sv.wake||sv.bed||sv.groggy)){
         sl_html='<div class="hem">Sleep</div><div class="hl">'
-          +(sv.bed||sv.wake?'Bed: '+(sv.bed||'?')+' &rarr; Wake: '+(sv.wake||'?')+'<br>':'')
+          +(sv.wake?'Wake: '+sv.wake:'')+(sv.bed?'  Bed: '+sv.bed:'')+(sv.wake||sv.bed?'<br>':'')
           +(sv.groggy?'Groggy: '+sv.groggy+'/5<br>':'')
-          +(sv.nightmare?'Nightmare  ':'')
-          +(sv.waking?'Mid-night waking':'')
+          +[sv.nightmare?'Nightmare':'',sv.vivid?'Vivid dream':'',sv.waking?'Mid-night waking':''].filter(Boolean).join('  ')
           +'</div>';
       }
     }
@@ -954,22 +1024,37 @@ document.querySelectorAll('.tb').forEach(function(b){
   });
 });
 
-// Water
-// (wired inline in rW via tap on each drop)
+// Water — live update
+var waterInp=document.getElementById('water-oz');
+if(waterInp){
+  waterInp.addEventListener('input',function(){day.waterOz=parseInt(this.value,10)||0;});
+  waterInp.addEventListener('change',function(){day.waterOz=parseInt(this.value,10)||0;});
+}
 
 // Meds
 document.querySelectorAll('.med-item').forEach(function(b){
   tap(b,function(){
     var v=b.dataset.m,idx=day.meds.indexOf(v);
     if(idx>=0)day.meds.splice(idx,1);else day.meds.push(v);
-    lset(dayK(nd),day);rMeds();
+    rMeds();
   });
 });
+// Zofran time input — stop tap from firing when interacting with inner input
+var ztInp=document.querySelector('.med-time-input[data-mt="zofran"]');
+if(ztInp){
+  ztInp.addEventListener('click',function(e){e.stopPropagation();});
+  ztInp.addEventListener('touchstart',function(e){e.stopPropagation();},{passive:true});
+  ztInp.addEventListener('change',function(){day.medTimes.zofran=this.value;});
+  ztInp.addEventListener('input',function(){day.medTimes.zofran=this.value;});
+}
 
-// Symptoms (wired inline in rSym)
+// Symptoms (wired inline in rSym — called on load)
+tap(document.getElementById('chk-gagging'),function(){slot.gagging=!slot.gagging;setChk('chk-gagging',slot.gagging);});
+tap(document.getElementById('chk-vomiting'),function(){slot.vomiting=!slot.vomiting;setChk('chk-vomiting',slot.vomiting);});
 
 // BM add
-tap(document.getElementById('bm-add'),function(){slot.bms.push(mkBM());rBMs();});
+tap(document.getElementById('bm-add'),function(){slot.bms.push(mkBM(false));rBMs();});
+tap(document.getElementById('bm-add-strain'),function(){slot.bms.push(mkBM(true));rBMs();});
 
 // Stress
 document.querySelectorAll('#gi-stress-opts .stress-opt').forEach(function(b){
@@ -980,14 +1065,12 @@ document.querySelectorAll('#gi-stress-opts .stress-opt').forEach(function(b){
 tap(document.getElementById('gerd-toggle'),function(){
   var c=document.getElementById('gerd-content');
   var a=document.getElementById('gerd-arrow');
-  var open=c.classList.toggle('open');
-  a.textContent=open?'\u2212':'+';
+  var open=c.classList.toggle('open');a.textContent=open?'\u2212':'+';
 });
 document.querySelectorAll('#gerd-content .chip').forEach(function(c){
   tap(c,function(){
     var v=c.dataset.v,idx=slot.gerd.indexOf(v);
-    if(idx>=0)slot.gerd.splice(idx,1);else slot.gerd.push(v);
-    rGERD();
+    if(idx>=0)slot.gerd.splice(idx,1);else slot.gerd.push(v);rGERD();
   });
 });
 
@@ -996,12 +1079,15 @@ function addF(){var inp=document.getElementById('fi'),v=inp.value.trim();if(v){s
 tap(document.getElementById('addf'),addF);
 document.getElementById('fi').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();addF();}});
 
-// GI save (slot + day)
+// GI save
 tap(document.getElementById('savebtn'),function(){
   slot.slotNotes=document.getElementById('slot-notes').value;
   day.dayNotes=document.getElementById('day-notes').value;
-  lset(slotK(nd,curTod),slot);
-  lset(dayK(nd),day);
+  day.waterOz=parseInt(document.getElementById('water-oz').value,10)||0;
+  // Sync Zofran time from DOM in case it wasn't caught by input event
+  var zt2=document.querySelector('.med-time-input[data-mt="zofran"]');
+  if(zt2)day.medTimes.zofran=zt2.value;
+  lset(slotK(nd,curTod),slot);lset(dayK(nd),day);
   toast('Saved');rBadge();
   var hp=document.getElementById('hp');if(hp.classList.contains('open'))rHist('hp','gi');
 });
@@ -1012,13 +1098,19 @@ tap(document.getElementById('htog'),function(){
   var o=p.classList.toggle('open');b.textContent=o?'History ^':'History';if(o)rHist('hp','gi');
 });
 
-// Migraine chips
+// Migraine
 document.querySelectorAll('#m-loc .chip').forEach(function(c){tap(c,function(){mg.loc=(mg.loc===c.dataset.v)?null:c.dataset.v;rMig();});});
 document.querySelectorAll('#m-syms .chip').forEach(function(c){tap(c,function(){var v=c.dataset.v,i=mg.syms.indexOf(v);if(i>=0)mg.syms.splice(i,1);else mg.syms.push(v);rMig();});});
 document.querySelectorAll('#m-prodrome .chip').forEach(function(c){tap(c,function(){var v=c.dataset.v,i=mg.prodrome.indexOf(v);if(i>=0)mg.prodrome.splice(i,1);else mg.prodrome.push(v);rMig();});});
 document.querySelectorAll('#mg-stress-opts .stress-opt').forEach(function(b){tap(b,function(){var v=parseInt(b.dataset.sv,10);mg.stress=(mg.stress===v)?-1:v;rMig();});});
 document.querySelectorAll('#m-meds .chip').forEach(function(c){tap(c,function(){var v=c.dataset.v,i=mg.meds.indexOf(v);if(i>=0)mg.meds.splice(i,1);else mg.meds.push(v);rMig();});});
 tap(document.getElementById('chk-medworks'),function(){mg.medworks=!mg.medworks;setChk('chk-medworks',mg.medworks);});
+
+// Migraine time inputs — live update to state
+var monsEl=document.getElementById('m-onset');
+if(monsEl){monsEl.addEventListener('input',function(){mg.onset=this.value;});monsEl.addEventListener('change',function(){mg.onset=this.value;});}
+var mendEl=document.getElementById('m-end');
+if(mendEl){mendEl.addEventListener('input',function(){mg.end=this.value;});mendEl.addEventListener('change',function(){mg.end=this.value;});}
 
 // Migraine save
 tap(document.getElementById('m-savebtn'),function(){
@@ -1030,25 +1122,28 @@ tap(document.getElementById('m-savebtn'),function(){
   if(!mg.weather){fetchWeather(function(w){mg.weather=w;renderWeather();doSave();});}else{doSave();}
 });
 
-// Migraine history
 tap(document.getElementById('mhtog'),function(){
   var p=document.getElementById('mhp'),b=document.getElementById('mhtog');
   var o=p.classList.toggle('open');b.textContent=o?'History ^':'History';if(o)rHist('mhp','migraine');
 });
 
-// Sleep checkboxes
+// Sleep — live update to state on input so groggy dots don't clear them
+var slWakeEl=document.getElementById('sl-wake');
+if(slWakeEl){slWakeEl.addEventListener('input',function(){sl.wake=this.value;});slWakeEl.addEventListener('change',function(){sl.wake=this.value;});}
+var slBedEl=document.getElementById('sl-bed');
+if(slBedEl){slBedEl.addEventListener('input',function(){sl.bed=this.value;});slBedEl.addEventListener('change',function(){sl.bed=this.value;});}
+
 tap(document.getElementById('chk-nightmare'),function(){sl.nightmare=!sl.nightmare;setChk('chk-nightmare',sl.nightmare);});
+tap(document.getElementById('chk-vivid'),function(){sl.vivid=!sl.vivid;setChk('chk-vivid',sl.vivid);});
 tap(document.getElementById('chk-waking'),function(){sl.waking=!sl.waking;setChk('chk-waking',sl.waking);});
 
-// Sleep save
 tap(document.getElementById('sl-savebtn'),function(){
-  sl.bed=document.getElementById('sl-bed').value;
   sl.wake=document.getElementById('sl-wake').value;
+  sl.bed=document.getElementById('sl-bed').value;
   lset(slK(nd),sl);toast('Sleep saved');
   var hp3=document.getElementById('slhp');if(hp3&&hp3.classList.contains('open'))rHist('slhp','sleep');
 });
 
-// Sleep history
 tap(document.getElementById('slhtog'),function(){
   var p=document.getElementById('slhp'),b=document.getElementById('slhtog');
   var o=p.classList.toggle('open');b.textContent=o?'History ^':'History';if(o)rHist('slhp','sleep');
